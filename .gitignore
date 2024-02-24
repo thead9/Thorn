@@ -1,0 +1,18 @@
+# Xcode
+.DS_Store
+*/.DS_Store
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+# Swift Package Manager - for those using Swift Package Manager
+Packages/
+Package.pins
+.build/
+
+# Miscellaneous
+DerivedData/
+*.hmap
+*.ipa
+*.xcarchive
+*.provisionprofile
