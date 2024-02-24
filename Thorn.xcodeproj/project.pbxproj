@@ -17,6 +17,7 @@
 		C7519FCE2B898097001B6DD6 /* ThornUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FCD2B898097001B6DD6 /* ThornUITestsLaunchTests.swift */; };
 		C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FDB2B89845E001B6DD6 /* Checklist.swift */; };
 		C7519FDD2B89845E001B6DD6 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FDB2B89845E001B6DD6 /* Checklist.swift */; };
+		C7519FE02B8A68DD001B6DD6 /* CheckListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C7519FCB2B898097001B6DD6 /* ThornUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornUITests.swift; sourceTree = "<group>"; };
 		C7519FCD2B898097001B6DD6 /* ThornUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C7519FDB2B89845E001B6DD6 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
+		C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		C7519FC02B898097001B6DD6 /* ThornTests */ = {
 			isa = PBXGroup;
 			children = (
+				C7519FDE2B8A68CB001B6DD6 /* Model */,
 				C7519FC12B898097001B6DD6 /* ThornTests.swift */,
 			);
 			path = ThornTests;
@@ -142,6 +145,14 @@
 			isa = PBXGroup;
 			children = (
 				C7519FDB2B89845E001B6DD6 /* Checklist.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C7519FDE2B8A68CB001B6DD6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7519FDD2B89845E001B6DD6 /* Checklist.swift in Sources */,
+				C7519FE02B8A68DD001B6DD6 /* CheckListTests.swift in Sources */,
 				C7519FC22B898097001B6DD6 /* ThornTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
