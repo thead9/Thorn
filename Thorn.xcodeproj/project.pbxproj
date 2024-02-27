@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FAC2B898095001B6DD6 /* ThornApp.swift */; };
 		C7519FAF2B898095001B6DD6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FAE2B898095001B6DD6 /* ContentView.swift */; };
-		C7519FB12B898095001B6DD6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FB02B898095001B6DD6 /* Item.swift */; };
 		C7519FB32B898097001B6DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB22B898097001B6DD6 /* Assets.xcassets */; };
 		C7519FB62B898097001B6DD6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB52B898097001B6DD6 /* Preview Assets.xcassets */; };
 		C7519FC22B898097001B6DD6 /* ThornTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FC12B898097001B6DD6 /* ThornTests.swift */; };
@@ -41,7 +40,6 @@
 		C7519FA92B898095001B6DD6 /* Thorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7519FAC2B898095001B6DD6 /* ThornApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornApp.swift; sourceTree = "<group>"; };
 		C7519FAE2B898095001B6DD6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C7519FB02B898095001B6DD6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		C7519FB22B898097001B6DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7519FB52B898097001B6DD6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C7519FB72B898097001B6DD6 /* Thorn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thorn.entitlements; sourceTree = "<group>"; };
@@ -104,9 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				C7519FAC2B898095001B6DD6 /* ThornApp.swift */,
+				C7519FE12B8D7ED2001B6DD6 /* View */,
 				C7519FDA2B89843F001B6DD6 /* Model */,
-				C7519FAE2B898095001B6DD6 /* ContentView.swift */,
-				C7519FB02B898095001B6DD6 /* Item.swift */,
 				C7519FB22B898097001B6DD6 /* Assets.xcassets */,
 				C7519FB72B898097001B6DD6 /* Thorn.entitlements */,
 				C7519FB82B898097001B6DD6 /* Info.plist */,
@@ -155,6 +152,14 @@
 				C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C7519FE12B8D7ED2001B6DD6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7519FAE2B898095001B6DD6 /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +294,6 @@
 			files = (
 				C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FAF2B898095001B6DD6 /* ContentView.swift in Sources */,
-				C7519FB12B898095001B6DD6 /* Item.swift in Sources */,
 				C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
