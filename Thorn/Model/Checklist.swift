@@ -12,17 +12,20 @@ import SwiftData
 /// A checklist to track completing certain tasks
 class Checklist {
   /// Name of the checklist
-  private(set) var name: String
+  var name: String
   
   /// The date the checklist was created
-  private(set) var dateCreated: Date
+  var dateCreated: Date
+  
+  /// Tasks associated with this checklist
+  var tasks: [Task]
   
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
   init(name: String) {
     self.name = name
-    let now = Date.now
-    self.dateCreated = now
+    self.dateCreated = Date.now
+    self.tasks = [Task]()
   }
   
   @discardableResult
