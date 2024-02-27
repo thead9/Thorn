@@ -25,7 +25,7 @@ struct ThornApp: App {
   
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      ThornView()
     }
     .modelContainer(sharedModelContainer)
   }
