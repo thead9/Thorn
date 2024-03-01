@@ -12,7 +12,8 @@ import SwiftData
 struct ThornApp: App {
   var sharedModelContainer: ModelContainer = {
     let schema = Schema([
-      Checklist.self
+      Checklist.self,
+      Task.self
     ])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     

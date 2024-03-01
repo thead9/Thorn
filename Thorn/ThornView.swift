@@ -41,7 +41,7 @@ struct ThornView: View {
   
   private func addItem() {
     withAnimation {
-      _ = Checklist.newItemForContext(name: "Test", context: modelContext)
+      _ = Checklist.newItem(named: "Test", for: modelContext)
     }
   }
   

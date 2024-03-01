@@ -10,7 +10,6 @@
 		C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FAC2B898095001B6DD6 /* ThornApp.swift */; };
 		C7519FB32B898097001B6DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB22B898097001B6DD6 /* Assets.xcassets */; };
 		C7519FB62B898097001B6DD6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB52B898097001B6DD6 /* Preview Assets.xcassets */; };
-		C7519FC22B898097001B6DD6 /* ThornTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FC12B898097001B6DD6 /* ThornTests.swift */; };
 		C7519FCC2B898097001B6DD6 /* ThornUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FCB2B898097001B6DD6 /* ThornUITests.swift */; };
 		C7519FCE2B898097001B6DD6 /* ThornUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FCD2B898097001B6DD6 /* ThornUITestsLaunchTests.swift */; };
 		C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FDB2B89845E001B6DD6 /* Checklist.swift */; };
@@ -19,6 +18,9 @@
 		C7519FE32B8D8395001B6DD6 /* ThornView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE22B8D8395001B6DD6 /* ThornView.swift */; };
 		C7519FE52B8D85D2001B6DD6 /* ChecklistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE42B8D85D2001B6DD6 /* ChecklistCellView.swift */; };
 		C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Task.swift */; };
+		C7519FEB2B8E8C0D001B6DD6 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */; };
+		C7519FEC2B8E8C99001B6DD6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Task.swift */; };
+		C7519FEE2B92721D001B6DD6 /* ModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +48,6 @@
 		C7519FB72B898097001B6DD6 /* Thorn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thorn.entitlements; sourceTree = "<group>"; };
 		C7519FB82B898097001B6DD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7519FBD2B898097001B6DD6 /* ThornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7519FC12B898097001B6DD6 /* ThornTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornTests.swift; sourceTree = "<group>"; };
 		C7519FC72B898097001B6DD6 /* ThornUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThornUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7519FCB2B898097001B6DD6 /* ThornUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornUITests.swift; sourceTree = "<group>"; };
 		C7519FCD2B898097001B6DD6 /* ThornUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -55,6 +56,8 @@
 		C7519FE22B8D8395001B6DD6 /* ThornView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornView.swift; sourceTree = "<group>"; };
 		C7519FE42B8D85D2001B6DD6 /* ChecklistCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCellView.swift; sourceTree = "<group>"; };
 		C7519FE62B8D88B6001B6DD6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
+		C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				C7519FDE2B8A68CB001B6DD6 /* Model */,
-				C7519FC12B898097001B6DD6 /* ThornTests.swift */,
 			);
 			path = ThornTests;
 			sourceTree = "<group>";
@@ -156,6 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */,
+				C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */,
+				C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -310,9 +314,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7519FEC2B8E8C99001B6DD6 /* Task.swift in Sources */,
+				C7519FEE2B92721D001B6DD6 /* ModelUtilities.swift in Sources */,
 				C7519FDD2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FE02B8A68DD001B6DD6 /* CheckListTests.swift in Sources */,
-				C7519FC22B898097001B6DD6 /* ThornTests.swift in Sources */,
+				C7519FEB2B8E8C0D001B6DD6 /* TaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
