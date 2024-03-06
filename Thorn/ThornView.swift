@@ -9,11 +9,17 @@ import SwiftData
 import SwiftUI
 
 struct ThornView: View {
+  @State var selectedChecklist: Checklist? = nil
+  
   var body: some View {
     NavigationSplitView {
-      ChecklistsView()
+      ChecklistsView(selectedChecklist: $selectedChecklist)
     } detail: {
-      Text("Please select a Checklist")
+      if let selectedChecklist {
+        ChecklistView(checklist: selectedChecklist)
+      } else {
+        Text("Select Checklist")
+      }
     }
   }
 }

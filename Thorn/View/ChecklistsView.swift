@@ -12,10 +12,11 @@ struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var checklists: [Checklist]
   @State private var isNewListSheetPresented = false
+  @Binding var selectedChecklist: Checklist?
   
   var body: some View {
-    List {
-      ForEach(checklists) { checklist in
+    List(selection: $selectedChecklist) {
+      ForEach(checklists, id: \.self) { checklist in
         ChecklistCellView(checklist: checklist)
       }
       .onDelete(perform: deleteItems)

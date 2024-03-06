@@ -11,10 +11,11 @@ struct ChecklistCellView: View {
   var checklist: Checklist
   
   var body: some View {
-    NavigationLink {
-      Text("\(checklist.name): \(checklist.dateCreated, format: Date.FormatStyle(date: .numeric, time: .standard))")
-    } label: {
-      Text("\(checklist.name): \(checklist.dateCreated, format: Date.FormatStyle(date: .numeric, time: .standard))")
-    }
+    Text(checklist.name)
+//    NavigationLink {
+//      Text("\(checklist.name): \(checklist.dateCreated, format: Date.FormatStyle(date: .numeric, time: .standard))")
+//    } label: {
+//      Text("\(checklist.name): \(checklist.dateCreated, format: Date.FormatStyle(date: .numeric, time: .standard))")
+//    }
   }
 }
