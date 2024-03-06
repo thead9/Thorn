@@ -21,6 +21,8 @@
 		C7519FEB2B8E8C0D001B6DD6 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */; };
 		C7519FEC2B8E8C99001B6DD6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Task.swift */; };
 		C7519FEE2B92721D001B6DD6 /* ModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */; };
+		C7519FF02B96BE1B001B6DD6 /* AddChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEF2B96BE1B001B6DD6 /* AddChecklistView.swift */; };
+		C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		C7519FE62B8D88B6001B6DD6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUtilities.swift; sourceTree = "<group>"; };
+		C7519FEF2B96BE1B001B6DD6 /* AddChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChecklistView.swift; sourceTree = "<group>"; };
+		C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				C7519FE42B8D85D2001B6DD6 /* ChecklistCellView.swift */,
+				C7519FEF2B96BE1B001B6DD6 /* AddChecklistView.swift */,
+				C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,9 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7519FE32B8D8395001B6DD6 /* ThornView.swift in Sources */,
+				C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */,
 				C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */,
 				C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */,
+				C7519FF02B96BE1B001B6DD6 /* AddChecklistView.swift in Sources */,
 				C7519FE52B8D85D2001B6DD6 /* ChecklistCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
