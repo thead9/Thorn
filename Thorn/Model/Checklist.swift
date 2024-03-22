@@ -20,6 +20,9 @@ class Checklist: Identifiable {
   /// The date the checklist was created
   var dateCreated: Date
   
+  /// Number of times this checklist has been completed
+  var completionCount: Int
+
   @Relationship(deleteRule: .cascade, inverse: \Task.checklist)
   /// Tasks associated with this checklist
   var tasks: [Task]
@@ -30,6 +33,7 @@ class Checklist: Identifiable {
     self.id = UUID()
     self.name = name
     self.dateCreated = Date.now
+    self.completionCount = 0
     self.tasks = [Task]()
   }
   

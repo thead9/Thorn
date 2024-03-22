@@ -14,7 +14,6 @@ struct ChecklistView: View {
   @Query private var tasks: [Task]
   @State private var isAddingNewTask = false
   @State private var newTaskName = ""
-  @State private var completionCount = 0
   @FocusState private var focusedField: FocusedField?
   
   /// Checklist associated with this view
@@ -22,7 +21,7 @@ struct ChecklistView: View {
   
   private var isCompleted: Bool {
     get {
-      tasks.allSatisfy({ $0.isCompleted })
+      tasks.count > 0 && tasks.allSatisfy({ $0.isCompleted })
     }
   }
   
@@ -53,6 +52,7 @@ struct ChecklistView: View {
             TaskCellView(task: task)
           }
           .onMove(perform: tasks.updateSortOrder)
+          .onDelete(perform: deleteItems)
         }
       }
       
@@ -60,7 +60,7 @@ struct ChecklistView: View {
         addingNewTaskView
       }
     }
-    .navigationTitle("\(checklist.name) \(completionCount)")
+    .navigationTitle("\(checklist.name) \(checklist.completionCount)")
     .toolbar {
       ToolbarItemGroup(placement: .topBarTrailing) {
         Button {
@@ -84,7 +84,7 @@ struct ChecklistView: View {
     }
     .onChange(of: isCompleted, initial: false) {
       if isCompleted {
-        completionCount += 1
+        checklist.completionCount += 1
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
           withAnimation {
@@ -156,6 +156,14 @@ struct ChecklistView: View {
     withAnimation {
       focusedField = nil
       isAddingNewTask = false
+    }
+  }
+  
+  private func deleteItems(offsets: IndexSet) {
+    withAnimation {
+      for index in offsets {
+        modelContext.delete(tasks[index])
+      }
     }
   }
   
