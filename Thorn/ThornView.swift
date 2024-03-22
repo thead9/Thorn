@@ -10,9 +10,14 @@ import SwiftUI
 
 struct ThornView: View {
   @State var selectedChecklist: Checklist? = nil
-  
+  @Query private var tasks: [Task]
   var body: some View {
     NavigationSplitView {
+//      List {
+//        ForEach(tasks, id: \.self) { task in
+//          TaskCellView(task: task)
+//        }
+//      }
       ChecklistsView(selectedChecklist: $selectedChecklist)
     } detail: {
       if let selectedChecklist {

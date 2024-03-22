@@ -22,11 +22,10 @@ struct ChecklistsView: View {
       .onDelete(perform: deleteItems)
     }
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItemGroup(placement: .topBarTrailing)
+      {
         EditButton()
-      }
-      
-      ToolbarItem {
+        
         Button {
           isNewListSheetPresented = true
         } label: {

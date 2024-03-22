@@ -10,7 +10,10 @@ import SwiftData
 
 @Model
 /// A checklist to track completing certain tasks
-class Checklist {
+class Checklist: Identifiable {
+  /// Unique Identifier
+  let id: UUID
+  
   /// Name of the checklist
   var name: String
   
@@ -24,6 +27,7 @@ class Checklist {
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
   init(named name: String) {
+    self.id = UUID()
     self.name = name
     self.dateCreated = Date.now
     self.tasks = [Task]()
@@ -45,6 +49,10 @@ class Checklist {
   /// Adds a task to this checklist
   /// - Parameter task: Task to add
   func add(_ task: Task) {
+    let maxSortOrder = tasks.map({ $0.sortOrder }).max()
+    if let maxSortOrder {
+      task.sortOrder = maxSortOrder + 1
+    }
     tasks.append(task)
   }
   
@@ -53,6 +61,12 @@ class Checklist {
   func remove(_ task: Task) {
     if let index = tasks.firstIndex(of: task) {
       tasks.remove(at: index)
+    }
+  }
+  
+  func reset() {
+    for task in tasks {
+      task.isCompleted = false
     }
   }
 }

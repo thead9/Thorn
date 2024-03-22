@@ -24,6 +24,8 @@
 		C7519FF02B96BE1B001B6DD6 /* AddChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEF2B96BE1B001B6DD6 /* AddChecklistView.swift */; };
 		C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */; };
 		C7519FF42B980905001B6DD6 /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF32B980905001B6DD6 /* ChecklistView.swift */; };
+		C76E6F502B996ADD00AAD00F /* Sortable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F4F2B996ADD00AAD00F /* Sortable.swift */; };
+		C76E6F522B9AB43200AAD00F /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F512B9AB43200AAD00F /* TaskCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		C7519FEF2B96BE1B001B6DD6 /* AddChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChecklistView.swift; sourceTree = "<group>"; };
 		C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistsView.swift; sourceTree = "<group>"; };
 		C7519FF32B980905001B6DD6 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
+		C76E6F4F2B996ADD00AAD00F /* Sortable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sortable.swift; sourceTree = "<group>"; };
+		C76E6F512B9AB43200AAD00F /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 			children = (
 				C7519FDB2B89845E001B6DD6 /* Checklist.swift */,
 				C7519FE62B8D88B6001B6DD6 /* Task.swift */,
+				C76E6F4F2B996ADD00AAD00F /* Sortable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				C7519FEF2B96BE1B001B6DD6 /* AddChecklistView.swift */,
 				C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */,
 				C7519FF32B980905001B6DD6 /* ChecklistView.swift */,
+				C76E6F512B9AB43200AAD00F /* TaskCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,9 +322,11 @@
 				C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FF42B980905001B6DD6 /* ChecklistView.swift in Sources */,
 				C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */,
+				C76E6F502B996ADD00AAD00F /* Sortable.swift in Sources */,
 				C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */,
 				C7519FF02B96BE1B001B6DD6 /* AddChecklistView.swift in Sources */,
 				C7519FE52B8D85D2001B6DD6 /* ChecklistCellView.swift in Sources */,
+				C76E6F522B9AB43200AAD00F /* TaskCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

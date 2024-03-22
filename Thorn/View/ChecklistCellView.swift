@@ -12,10 +12,5 @@ struct ChecklistCellView: View {
   
   var body: some View {
     Text(checklist.name)
-//    NavigationLink {
-//      Text("\(checklist.name): \(checklist.dateCreated, format: Date.FormatStyle(date: .numeric, time: .standard))")
-//    } label: {
-//      Text("\(checklist.name): \(checklist.dateCreated, format: Date.FormatStyle(date: .numeric, time: .standard))")
-//    }
   }
 }
