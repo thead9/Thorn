@@ -64,6 +64,7 @@ class Checklist: Identifiable {
     }
   }
   
+  /// Resets the completion status of tasks
   func reset() {
     for task in tasks {
       task.isCompleted = false

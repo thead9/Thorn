@@ -8,10 +8,13 @@
 import SwiftData
 import SwiftUI
 
+/// View for displaying checklists
 struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var checklists: [Checklist]
   @State private var isNewListSheetPresented = false
+  
+  /// Selected checklist
   @Binding var selectedChecklist: Checklist?
   
   var body: some View {

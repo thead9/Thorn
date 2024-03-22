@@ -8,21 +8,32 @@
 import SwiftData
 import SwiftUI
 
+/// View for a specific checklist
 struct ChecklistView: View {
   @Environment(\.modelContext) private var modelContext
-  let checklist: Checklist
   @Query private var tasks: [Task]
   @State private var isAddingNewTask = false
   @State private var newTaskName = ""
   @State private var completionCount = 0
   @FocusState private var focusedField: FocusedField?
   
-  var isCompleted: Bool {
+  /// Checklist associated with this view
+  let checklist: Checklist
+  
+  private var isCompleted: Bool {
     get {
       tasks.allSatisfy({ $0.isCompleted })
     }
   }
   
+  private var isAddableName: Bool {
+    get {
+      newTaskName.trimmingCharacters(in: .whitespaces).count > 0
+    }
+  }
+  
+  /// Creates a ChecklistView
+  /// - Parameter checklist: Checklist to create the view for
   init(checklist: Checklist) {
     self.checklist = checklist
     
@@ -32,12 +43,6 @@ struct ChecklistView: View {
     }
     
     _tasks = Query(filter: predicate, sort: [SortDescriptor(\.sortOrder)])
-  }
-  
-  private var isAddableName: Bool {
-    get {
-      newTaskName.trimmingCharacters(in: .whitespaces).count > 0
-    }
   }
   
   var body: some View {
@@ -151,24 +156,6 @@ struct ChecklistView: View {
     withAnimation {
       focusedField = nil
       isAddingNewTask = false
-    }
-  }
-  
-  private func move( from source: IndexSet, to destination: Int) {
-    // Make an array of items from fetched results
-    var revisedItems: [Task] = tasks.map{ $0 }
-    
-    // change the order of the items in the array
-    revisedItems.move(fromOffsets: source, toOffset: destination )
-    
-    // update the userOrder attribute in revisedItems to
-    // persist the new order. This is done in reverse order
-    // to minimize changes to the indices.
-    for reverseIndex in stride( from: revisedItems.count - 1,
-                                through: 0,
-                                by: -1 )
-    {
-      revisedItems[reverseIndex].sortOrder = reverseIndex
     }
   }
   

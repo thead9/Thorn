@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View for adding a new checklist
 struct AddChecklistView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var modelContext

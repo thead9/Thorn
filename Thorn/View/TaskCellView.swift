@@ -8,10 +8,12 @@
 import SwiftData
 import SwiftUI
 
+/// View for a task cell in a list
 struct TaskCellView: View {
-  let task: Task
+  @State private var completionBounceValue: Int = 0
   
-  @State var bounceValue: Int = 0
+  /// Task this view is associated with
+  let task: Task
     
   var body: some View {
     HStack(spacing: 15) {
@@ -22,7 +24,7 @@ struct TaskCellView: View {
         .symbolEffect(
           .bounce,
           options: .speed(1.5),
-          value: bounceValue
+          value: completionBounceValue
         )
       
       Text(task.name)
@@ -34,7 +36,7 @@ struct TaskCellView: View {
       withAnimation {
         task.isCompleted.toggle()
         if task.isCompleted {
-          bounceValue += 1
+          completionBounceValue += 1
         }
       }
     }

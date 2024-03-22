@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+/// View for a checklist cell in a list
 struct ChecklistCellView: View {
+  /// Checklist this view is associated with
   var checklist: Checklist
   
   var body: some View {
