@@ -21,9 +21,17 @@ struct ChecklistsView: View {
     List(selection: $selectedChecklist) {
       ForEach(checklists, id: \.self) { checklist in
         ChecklistCellView(checklist: checklist)
+          .listRowSeparator(.hidden)
+          .listRowBackground(
+            RoundedRectangle(cornerRadius: 10)
+              .background(.clear)
+              .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
+              .padding(.vertical, 5)
+          )
       }
       .onDelete(perform: deleteItems)
     }
+    //.listStyle(.plain)
     .toolbar {
       ToolbarItemGroup(placement: .topBarTrailing)
       {
