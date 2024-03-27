@@ -46,7 +46,7 @@ struct ChecklistsView: View {
     }
     .sheet(isPresented: $isNewListSheetPresented) {
       NavigationStack {
-        AddChecklistView()
+        ChecklistAddView()
       }
     }
   }

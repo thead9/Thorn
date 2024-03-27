@@ -1,5 +1,5 @@
 //
-//  AddChecklistView.swift
+//  ChecklistAddView.swift
 //  Thorn
 //
 //  Created by Thomas Headley on 3/4/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// View for adding a new checklist
-struct AddChecklistView: View {
+struct ChecklistAddView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var modelContext
   @State private var name = ""
