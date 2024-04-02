@@ -62,7 +62,7 @@ struct ChecklistView: View {
     }
     .navigationTitle("\(checklist.name) \(checklist.completionCount)")
     .toolbar {
-      ToolbarItemGroup(placement: .topBarTrailing) {
+      ToolbarItemGroup(placement: .topBarLeading) {
         Button {
           withAnimation {
             checklist.reset()
@@ -71,6 +71,10 @@ struct ChecklistView: View {
           Text("Reset")
         }
         .disabled(!tasks.contains(where: { $0.isCompleted }))
+      }
+      
+      ToolbarItemGroup(placement: .topBarTrailing) {
+        EditButton()
         
         Button {
           withAnimation {
