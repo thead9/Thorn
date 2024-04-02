@@ -12,7 +12,7 @@ import SwiftUI
 struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var checklists: [Checklist]
-  @State private var isNewListSheetPresented = false
+  @State private var isListModSheetPresented: ChecklistModView.ModMode? = nil
   
   /// Selected checklist
   @Binding var selectedChecklist: Checklist?
@@ -28,25 +28,31 @@ struct ChecklistsView: View {
               .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
               .padding(.vertical, 5)
           )
+          .contextMenu {
+            Button {
+              isListModSheetPresented = .edit(checklist)
+            } label: {
+              Label("Edit Checklist", systemImage: "pencil")
+            }
+          }
       }
       .onDelete(perform: deleteItems)
     }
-    //.listStyle(.plain)
     .toolbar {
       ToolbarItemGroup(placement: .topBarTrailing)
       {
         EditButton()
         
         Button {
-          isNewListSheetPresented = true
+          isListModSheetPresented = .add
         } label: {
           Label("Add Item", systemImage: "plus")
         }
       }
     }
-    .sheet(isPresented: $isNewListSheetPresented) {
+    .sheet(item: $isListModSheetPresented) { modMode in
       NavigationStack {
-        ChecklistAddView()
+        ChecklistModView(modMode)
       }
     }
   }

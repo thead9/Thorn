@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,11 +21,12 @@
 		C7519FEB2B8E8C0D001B6DD6 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */; };
 		C7519FEC2B8E8C99001B6DD6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Task.swift */; };
 		C7519FEE2B92721D001B6DD6 /* ModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */; };
-		C7519FF02B96BE1B001B6DD6 /* ChecklistAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEF2B96BE1B001B6DD6 /* ChecklistAddView.swift */; };
 		C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */; };
 		C7519FF42B980905001B6DD6 /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF32B980905001B6DD6 /* ChecklistView.swift */; };
 		C76E6F502B996ADD00AAD00F /* Sortable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F4F2B996ADD00AAD00F /* Sortable.swift */; };
 		C76E6F522B9AB43200AAD00F /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F512B9AB43200AAD00F /* TaskCellView.swift */; };
+		C7AA3CDC2BB3B60A004E7F7E /* ChecklistModView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AA3CDB2BB3B60A004E7F7E /* ChecklistModView.swift */; };
+		C7AA3CE02BB3BCAA004E7F7E /* Firnen in Frameworks */ = {isa = PBXBuildFile; productRef = C7AA3CDF2BB3BCAA004E7F7E /* Firnen */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,11 +64,11 @@
 		C7519FE62B8D88B6001B6DD6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUtilities.swift; sourceTree = "<group>"; };
-		C7519FEF2B96BE1B001B6DD6 /* ChecklistAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistAddView.swift; sourceTree = "<group>"; };
 		C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistsView.swift; sourceTree = "<group>"; };
 		C7519FF32B980905001B6DD6 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		C76E6F4F2B996ADD00AAD00F /* Sortable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sortable.swift; sourceTree = "<group>"; };
 		C76E6F512B9AB43200AAD00F /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
+		C7AA3CDB2BB3B60A004E7F7E /* ChecklistModView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistModView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7AA3CE02BB3BCAA004E7F7E /* Firnen in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,8 +180,8 @@
 		C7519FE12B8D7ED2001B6DD6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C7519FEF2B96BE1B001B6DD6 /* ChecklistAddView.swift */,
 				C7519FE42B8D85D2001B6DD6 /* ChecklistCellView.swift */,
+				C7AA3CDB2BB3B60A004E7F7E /* ChecklistModView.swift */,
 				C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */,
 				C7519FF32B980905001B6DD6 /* ChecklistView.swift */,
 				C76E6F512B9AB43200AAD00F /* TaskCellView.swift */,
@@ -203,6 +205,9 @@
 			dependencies = (
 			);
 			name = Thorn;
+			packageProductDependencies = (
+				C7AA3CDF2BB3BCAA004E7F7E /* Firnen */,
+			);
 			productName = Thorn;
 			productReference = C7519FA92B898095001B6DD6 /* Thorn.app */;
 			productType = "com.apple.product-type.application";
@@ -275,6 +280,9 @@
 				Base,
 			);
 			mainGroup = C7519FA02B898095001B6DD6;
+			packageReferences = (
+				C7AA3CDE2BB3BCAA004E7F7E /* XCLocalSwiftPackageReference "../Firnen" */,
+			);
 			productRefGroup = C7519FAA2B898095001B6DD6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -324,9 +332,9 @@
 				C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */,
 				C76E6F502B996ADD00AAD00F /* Sortable.swift in Sources */,
 				C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */,
-				C7519FF02B96BE1B001B6DD6 /* ChecklistAddView.swift in Sources */,
 				C7519FE52B8D85D2001B6DD6 /* ChecklistCellView.swift in Sources */,
 				C76E6F522B9AB43200AAD00F /* TaskCellView.swift in Sources */,
+				C7AA3CDC2BB3B60A004E7F7E /* ChecklistModView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +672,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		C7AA3CDE2BB3BCAA004E7F7E /* XCLocalSwiftPackageReference "../Firnen" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Firnen;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C7AA3CDF2BB3BCAA004E7F7E /* Firnen */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Firnen;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C7519FA12B898095001B6DD6 /* Project object */;
 }
