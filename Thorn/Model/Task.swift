@@ -25,7 +25,7 @@ class Task: Identifiable, Sortable {
   
   /// Indicates if the task is completed
   var isCompleted: Bool = false
-  
+    
   /// Creates a task
   /// - Parameters:
   ///   - named: Name of the task

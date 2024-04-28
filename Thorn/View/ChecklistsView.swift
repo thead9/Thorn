@@ -5,56 +5,72 @@
 //  Created by Thomas Headley on 3/4/24.
 //
 
+import Firnen
 import SwiftData
 import SwiftUI
 
 /// View for displaying checklists
 struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
+  @Environment(\.editMode) private var editMode
   @Query private var checklists: [Checklist]
-  @State private var isListModSheetPresented: ChecklistModView.ModMode? = nil
+  @StateObject private var sheet = SheetContext()
   
-  /// Selected checklist
-  @Binding var selectedChecklist: Checklist?
+  private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
   
   var body: some View {
-    List(selection: $selectedChecklist) {
+    List {
       ForEach(checklists, id: \.self) { checklist in
-        ChecklistCellView(checklist: checklist)
-          .listRowSeparator(.hidden)
-          .listRowBackground(
-            RoundedRectangle(cornerRadius: 10)
-              .background(.clear)
-              .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
-              .padding(.vertical, 5)
-          )
-          .contextMenu {
-            Button {
-              isListModSheetPresented = .edit(checklist)
-            } label: {
-              Label("Edit Checklist", systemImage: "pencil")
-            }
-          }
+        ChecklistNavigationLink(checklist: checklist)
+          .separatedCell()
+          .contextMenu { contextMenu(for: checklist) }
       }
       .onDelete(perform: deleteItems)
+      
+      addChecklistButton
+        .padding(.vertical)
+        .separatedCell()
     }
-    .toolbar {
-      ToolbarItemGroup(placement: .topBarTrailing)
-      {
-        EditButton()
-        
-        Button {
-          isListModSheetPresented = .add
-        } label: {
-          Label("Add Item", systemImage: "plus")
-        }
+    .navigationDestination(for: Checklist.self) { ChecklistView(checklist: $0) }
+    .toolbar { toolbar }
+    .sheet(sheet)
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbar: some ToolbarContent {
+    ToolbarItemGroup(placement: .topBarTrailing)
+    {
+      EditButton()
+      
+      Button {
+        sheet.present(AppSheet.addChecklist)
+      } label: {
+        Label("Create New Checklist", systemImage: "plus")
       }
     }
-    .sheet(item: $isListModSheetPresented) { modMode in
-      NavigationStack {
-        ChecklistModView(modMode)
-      }
+  }
+  
+  @ViewBuilder
+  private var addChecklistButton: some View {
+    Button {
+      sheet.present(AppSheet.addChecklist)
+    } label: {
+      Label("Create New Checklist", systemImage: "plus")
     }
+  }
+  
+  @ViewBuilder
+  private func editChecklistButton(for checklist: Checklist) -> some View {
+    Button {
+      sheet.present(AppSheet.editChecklist(checklist))
+    } label: {
+      Label("Edit Checklist", systemImage: "pencil")
+    }
+  }
+  
+  @ViewBuilder
+  private func contextMenu(for checklist: Checklist) -> some View {
+    editChecklistButton(for: checklist)
   }
   
   private func deleteItems(offsets: IndexSet) {
@@ -62,6 +78,26 @@ struct ChecklistsView: View {
       for index in offsets {
         modelContext.delete(checklists[index])
       }
+    }
+  }
+}
+
+/// Oddly needed because isEditing doesn't appear to change when this is in its parent view
+private struct ChecklistNavigationLink: View {
+  @Environment(\.editMode) private var editMode
+  
+  private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
+  
+  /// Checklist for the navigation link
+  let checklist: Checklist
+  
+  var body: some View {
+    if !isEditing {
+      NavigationLink(value: checklist) {
+        ChecklistCellView(checklist: checklist)
+      }
+    } else {
+      ChecklistCellView(checklist: checklist)
     }
   }
 }

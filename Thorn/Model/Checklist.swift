@@ -74,6 +74,45 @@ class Checklist: Identifiable {
       task.isCompleted = false
     }
   }
+  
+  /// Gets the total number of tasks in the checklist
+  /// - Parameter modelContext: Model Context checklist is in
+  /// - Returns: Total number of tasks
+  func taskCount(for modelContext: ModelContext) -> Int {
+    (try? modelContext.fetchCount(taskFetchDescriptor)) ?? 0
+  }
+  
+  /// Gets the total number of completed tasks in the checklist
+  /// - Parameter modelContext: Model Context checklist is in
+  /// - Returns: Total number of completed tasks
+  func completedTaskCount(for modelContext: ModelContext) -> Int {
+    (try? modelContext.fetchCount(completedTaskFetchDescriptor)) ?? 0
+  }
+}
+
+// MARK: Fetch Descriptors
+extension Checklist {
+  /// Descriptor for getting the tasks in the checklist
+  var taskFetchDescriptor: FetchDescriptor<Task> {
+    let id = self.id
+    
+    let taskPredicate = #Predicate<Task> { task in
+      task.checklist?.id == id
+    }
+    
+    return FetchDescriptor<Task>(predicate: taskPredicate)
+  }
+  
+  /// Descriptor for getting completed tasks in the checklist
+  var completedTaskFetchDescriptor: FetchDescriptor<Task> {
+    let id = self.id
+    
+    let completedTaskPredicate = #Predicate<Task> { task in
+      task.checklist?.id == id && task.isCompleted
+    }
+    
+    return FetchDescriptor<Task>(predicate: completedTaskPredicate)
+  }
 }
 
 extension ModelContext {

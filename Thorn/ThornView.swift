@@ -10,18 +10,12 @@ import SwiftUI
 
 /// View for the main navigation structure
 struct ThornView: View {
-  /// Selected checklist
-  @State var selectedChecklist: Checklist? = nil
-  
   var body: some View {
     NavigationSplitView {
-      ChecklistsView(selectedChecklist: $selectedChecklist)
+      ChecklistsView()
+        .navigationTitle("Thorn")
     } detail: {
-      if let selectedChecklist {
-        ChecklistView(checklist: selectedChecklist)
-      } else {
-        Text("Select Checklist")
-      }
+      Text("Select Checklist")
     }
   }
 }

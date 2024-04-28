@@ -8,21 +8,19 @@
 import Firnen
 import SwiftUI
 
+/// View for modifying a checklist
 struct ChecklistModView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var modelContext
   @State private var name: String
   @FocusState private var focusedField: FocusedField?
+  
   private let modMode: ModMode
+  private var isNameValid: Bool { !name.isEmpty }
+  private var isFormValid: Bool { isNameValid }
   
-  private var isNameValid: Bool {
-    !name.isEmpty
-  }
-  
-  private var isFormValid: Bool {
-    isNameValid
-  }
-  
+  /// Creates a ChecklistModView with an initial modification mode
+  /// - Parameter modMode: Modification mode
   init(_ modMode: ModMode) {
     switch modMode {
     case .add:
@@ -42,32 +40,33 @@ struct ChecklistModView: View {
           .validatedField(isValid: isNameValid, invalidNotice: .required)
       }
     }
-    .onAppear {
-      focusedField = .name
-    }
+    .onAppear { focusedField = .name }
     .navigationTitle(modMode.navigationTitle)
-    .toolbar {
-      ToolbarItem(placement: .topBarLeading) {
-        Button {
-          dismiss()
-        } label: {
-          Text("Cancel")
-        }
+    .toolbar { toolbar }
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbar: some ToolbarContent {
+    ToolbarItem(placement: .topBarLeading) {
+      Button {
+        dismiss()
+      } label: {
+        Text("Cancel")
       }
-      
-      ToolbarItem(placement: .topBarTrailing) {
-        Button {
-          modItem()
-          dismiss()
-        } label: {
-          Text("Save")
-        }
-        .disabled(!isFormValid)
+    }
+    
+    ToolbarItem(placement: .topBarTrailing) {
+      Button {
+        modifyItem()
+        dismiss()
+      } label: {
+        Text("Save")
       }
+      .disabled(!isFormValid)
     }
   }
   
-  private func modItem() {
+  private func modifyItem() {
     switch modMode {
     case .add:
       withAnimation {
@@ -78,6 +77,13 @@ struct ChecklistModView: View {
     }
   }
   
+  private enum FocusedField {
+    case name
+  }
+}
+
+extension ChecklistModView {
+  /// Modes for the ChecklistModView can be in
   enum ModMode: Identifiable {
     var id: String {
       switch self {
@@ -91,6 +97,7 @@ struct ChecklistModView: View {
     case add
     case edit(_ checklist: Checklist)
     
+    /// Gets the navigation title for the mode
     var navigationTitle: String {
       get {
         switch self {
@@ -101,9 +108,5 @@ struct ChecklistModView: View {
         }
       }
     }
-  }
-  
-  private enum FocusedField {
-    case name
   }
 }

@@ -8,60 +8,54 @@
 import SwiftData
 import SwiftUI
 
-/// View for a task cell in a list
+/// View for a task cell
 struct TaskCellView: View {
-  @Environment(\.editMode) private var editMode
-  @State private var completionBounceValue: Int = 0
-  @State private var editName: String
+  @Environment(\.modelContext) private var modelContext
+  @State private var taskName: String
+  @FocusState private var isTaskNameFocused: Bool
   
-  /// Task this view is associated with
+  /// Task this cell is associated with
   let task: Task
   
-  private var isEditing: Bool {
-     editMode?.wrappedValue.isEditing == true
+  /// Creates a TaskCellView
+  /// - Parameter task: Task for the view
+  init(task: Task) {
+    _taskName = State(initialValue: task.name)
+    self.task = task
+    self.isTaskNameFocused = true
   }
   
-  init(task: Task) {
-    self.task = task
-    _editName = State(initialValue: task.name)
-  }
-    
   var body: some View {
-    HStack(spacing: 15) {
-      if isEditing {
-        TextField("Task Name", text: $editName)
-      }
-      else {
-        Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
-          .renderingMode(.original)
-          .foregroundColor(Color.accentColor)
-          .imageScale(.large)
-          .symbolEffect(
-            .bounce,
-            options: .speed(1.5),
-            value: completionBounceValue
-          )
-        
-        Text(task.name)
-      }
-      
-      Spacer()
-    }
-    .contentShape(Rectangle())
-    .onTapGesture {
-      if !isEditing {
-        withAnimation {
-          task.isCompleted.toggle()
-          if task.isCompleted {
-            completionBounceValue += 1
+    HStack {
+      Label("Is Complete", systemImage: task.isCompleted ? "checkmark.circle.fill" : "circle")
+        .foregroundStyle(Color.accentColor)
+        .labelStyle(.iconOnly)
+        .imageScale(.large)
+        .onTapGesture {
+          withAnimation {
+            task.isCompleted.toggle()
           }
         }
-      }
+      
+      TextField("Task Name", text: $taskName)
+        .focused($isTaskNameFocused)
+        .submitLabel(.done)
+        .onSubmit {
+          changeName()
+        }
+        .onChange(of: isTaskNameFocused) {
+          if !isTaskNameFocused {
+            changeName()
+          }
+        }
     }
-    .onChange(of: isEditing, initial: false) { oldIsEditing, newIsEditing in
-      if oldIsEditing && !newIsEditing {
-        task.name = editName
-      }
+  }
+  
+  private func changeName() {
+    if !taskName.isEmpty {
+      task.name = taskName
+    } else {
+      modelContext.delete(task)
     }
   }
 }

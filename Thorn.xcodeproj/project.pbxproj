@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C73963BF2BDC8CF600C22904 /* AppSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73963BE2BDC8CF600C22904 /* AppSheet.swift */; };
 		C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FAC2B898095001B6DD6 /* ThornApp.swift */; };
 		C7519FB32B898097001B6DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB22B898097001B6DD6 /* Assets.xcassets */; };
 		C7519FB62B898097001B6DD6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB52B898097001B6DD6 /* Preview Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C73963BE2BDC8CF600C22904 /* AppSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSheet.swift; sourceTree = "<group>"; };
 		C7519FA92B898095001B6DD6 /* Thorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7519FAC2B898095001B6DD6 /* ThornApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornApp.swift; sourceTree = "<group>"; };
 		C7519FB22B898097001B6DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */,
 				C7519FF32B980905001B6DD6 /* ChecklistView.swift */,
 				C76E6F512B9AB43200AAD00F /* TaskCellView.swift */,
+				C73963BE2BDC8CF600C22904 /* AppSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			files = (
 				C7519FE32B8D8395001B6DD6 /* ThornView.swift in Sources */,
 				C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */,
+				C73963BF2BDC8CF600C22904 /* AppSheet.swift in Sources */,
 				C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FF42B980905001B6DD6 /* ChecklistView.swift in Sources */,
 				C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */,
