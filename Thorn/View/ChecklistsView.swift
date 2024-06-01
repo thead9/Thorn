@@ -13,7 +13,9 @@ import SwiftUI
 struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
   @Environment(\.editMode) private var editMode
+  @EnvironmentObject private var purchaseManager: PurchaseManager
   @Query private var checklists: [Checklist]
+  @Query private var feats: [Feat]
   @StateObject private var sheet = SheetContext()
   
   private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
@@ -21,15 +23,16 @@ struct ChecklistsView: View {
   var body: some View {
     List {
       ForEach(checklists, id: \.self) { checklist in
-        ChecklistNavigationLink(checklist: checklist)
+        ChecklistNavigationLink(checklist: checklist, sheet: sheet)
           .separatedCell()
           .contextMenu { contextMenu(for: checklist) }
       }
       .onDelete(perform: deleteItems)
       
-      addChecklistButton
-        .padding(.vertical)
-        .separatedCell()
+      Section {
+        addChecklistButton
+          .foregroundStyle(Color.accentColor)
+      }
     }
     .navigationDestination(for: Checklist.self) { ChecklistView(checklist: $0) }
     .toolbar { toolbar }
@@ -38,22 +41,29 @@ struct ChecklistsView: View {
   
   @ToolbarContentBuilder
   private var toolbar: some ToolbarContent {
-    ToolbarItemGroup(placement: .topBarTrailing)
-    {
+    ToolbarItemGroup(placement: .topBarLeading) {
+      Button {
+        sheet.present(AppSheet.settings)
+      } label: {
+        Label("Settings", systemImage: "gearshape")
+      }
+    }
+    
+    ToolbarItemGroup(placement: .topBarTrailing) {
       EditButton()
       
-      Button {
-        sheet.present(AppSheet.addChecklist)
-      } label: {
-        Label("Create New Checklist", systemImage: "plus")
-      }
+      addChecklistButton
     }
   }
   
   @ViewBuilder
   private var addChecklistButton: some View {
     Button {
-      sheet.present(AppSheet.addChecklist)
+      if purchaseManager.hasUnlockedPlus || modelContext.checklistCount() < CheckPlus.freeLists {
+        sheet.present(AppSheet.addChecklist)
+      } else {
+        sheet.present(AppSheet.paywall)
+      }
     } label: {
       Label("Create New Checklist", systemImage: "plus")
     }
@@ -64,13 +74,18 @@ struct ChecklistsView: View {
     Button {
       sheet.present(AppSheet.editChecklist(checklist))
     } label: {
-      Label("Edit Checklist", systemImage: "pencil")
+      Label("Edit Checklist", systemImage: "pencil.circle")
     }
   }
   
   @ViewBuilder
   private func contextMenu(for checklist: Checklist) -> some View {
     editChecklistButton(for: checklist)
+    Button(role: .destructive) {
+      modelContext.delete(checklist: checklist)
+    } label: {
+      Label("Delete Checklist", systemImage: "trash")
+    }
   }
   
   private func deleteItems(offsets: IndexSet) {
@@ -91,13 +106,16 @@ private struct ChecklistNavigationLink: View {
   /// Checklist for the navigation link
   let checklist: Checklist
   
+  /// Sheet context for displaying sheets for this cell
+  let sheet: SheetContext
+  
   var body: some View {
     if !isEditing {
       NavigationLink(value: checklist) {
-        ChecklistCellView(checklist: checklist)
+        ChecklistCellView(checklist: checklist, sheet: sheet)
       }
     } else {
-      ChecklistCellView(checklist: checklist)
+      ChecklistCellView(checklist: checklist, sheet: sheet)
     }
   }
 }

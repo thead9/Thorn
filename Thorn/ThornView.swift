@@ -10,12 +10,15 @@ import SwiftUI
 
 /// View for the main navigation structure
 struct ThornView: View {
+  @State private var columnVisibility = NavigationSplitViewVisibility.doubleColumn
+  
   var body: some View {
-    NavigationSplitView {
+    NavigationSplitView(columnVisibility: $columnVisibility) {
       ChecklistsView()
-        .navigationTitle("Thorn")
+        .navigationTitle("Check & Check")
     } detail: {
-      Text("Select Checklist")
+      DetailPlaceholderView()
     }
+    .navigationSplitViewStyle(.balanced)
   }
 }

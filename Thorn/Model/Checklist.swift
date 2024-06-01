@@ -23,9 +23,9 @@ class Checklist: Identifiable {
   /// Number of times this checklist has been completed
   var completionCount: Int
 
-  @Relationship(deleteRule: .cascade, inverse: \Task.checklist)
+  @Relationship(deleteRule: .cascade, inverse: \Feat.checklist)
   /// Tasks associated with this checklist
-  var tasks: [Task]
+  var feats: [Feat]
   
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
@@ -34,7 +34,7 @@ class Checklist: Identifiable {
     self.name = name
     self.dateCreated = Date.now
     self.completionCount = 0
-    self.tasks = [Task]()
+    self.feats = [Feat]()
   }
   
   @discardableResult
@@ -50,68 +50,48 @@ class Checklist: Identifiable {
     return checklist
   }
   
-  /// Adds a task to this checklist
+  /// Adds a feat to this checklist
   /// - Parameter task: Task to add
-  func add(_ task: Task) {
-    let maxSortOrder = tasks.map({ $0.sortOrder }).max()
+  func add(_ feat: Feat) {
+    let maxSortOrder = feats.map({ $0.sortOrder }).max()
     if let maxSortOrder {
-      task.sortOrder = maxSortOrder + 1
+      feat.sortOrder = maxSortOrder + 1
     }
-    tasks.append(task)
+    feats.append(feat)
   }
   
   /// Removes a task from this checklist
-  /// - Parameter task: Task to remove
-  func remove(_ task: Task) {
-    if let index = tasks.firstIndex(of: task) {
-      tasks.remove(at: index)
+  /// - Parameter feat: Task to remove
+  func remove(_ feat: Feat) {
+    if let index = feats.firstIndex(of: feat) {
+      feats.remove(at: index)
     }
   }
   
   /// Resets the completion status of tasks
   func reset() {
-    for task in tasks {
-      task.isCompleted = false
+    for feat in feats {
+      feat.isCompleted = false
     }
   }
   
-  /// Gets the total number of tasks in the checklist
-  /// - Parameter modelContext: Model Context checklist is in
-  /// - Returns: Total number of tasks
-  func taskCount(for modelContext: ModelContext) -> Int {
-    (try? modelContext.fetchCount(taskFetchDescriptor)) ?? 0
-  }
-  
-  /// Gets the total number of completed tasks in the checklist
-  /// - Parameter modelContext: Model Context checklist is in
-  /// - Returns: Total number of completed tasks
-  func completedTaskCount(for modelContext: ModelContext) -> Int {
-    (try? modelContext.fetchCount(completedTaskFetchDescriptor)) ?? 0
+  func completionCheck() {
+    if feats.count > 0 && feats.allSatisfy({ $0.isCompleted }) {
+      completionCount += 1
+    }
   }
 }
 
-// MARK: Fetch Descriptors
+// MARK: Predicates
 extension Checklist {
-  /// Descriptor for getting the tasks in the checklist
-  var taskFetchDescriptor: FetchDescriptor<Task> {
+  /// Prredicate for getting the tasks in the checklist
+  var featsPredicate: Predicate<Feat> {
     let id = self.id
-    
-    let taskPredicate = #Predicate<Task> { task in
-      task.checklist?.id == id
+    let predicate = #Predicate<Feat> { feat in
+      feat.checklist?.id == id
     }
     
-    return FetchDescriptor<Task>(predicate: taskPredicate)
-  }
-  
-  /// Descriptor for getting completed tasks in the checklist
-  var completedTaskFetchDescriptor: FetchDescriptor<Task> {
-    let id = self.id
-    
-    let completedTaskPredicate = #Predicate<Task> { task in
-      task.checklist?.id == id && task.isCompleted
-    }
-    
-    return FetchDescriptor<Task>(predicate: completedTaskPredicate)
+    return predicate
   }
 }
 
@@ -120,10 +100,14 @@ extension ModelContext {
   /// Ideally, this wouldn't be needed, but having issue with SwiftData automatically deleting
   /// - Parameter checklist: Checklist to delete
   func delete(checklist: Checklist) {
-    for task in checklist.tasks {
-      self.delete(task)
+    for feat in checklist.feats {
+      self.delete(feat)
     }
     
     self.delete(checklist)
+  }
+  
+  func checklistCount() -> Int {
+    (try? fetchCount(FetchDescriptor<Checklist>())) ?? 0
   }
 }

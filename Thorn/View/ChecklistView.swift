@@ -5,6 +5,7 @@
 //  Created by Thomas Headley on 3/5/24.
 //
 
+import Firnen
 import SwiftData
 import SwiftUI
 
@@ -12,82 +13,71 @@ import SwiftUI
 struct ChecklistView: View {
   @Environment(\.modelContext) private var modelContext
   @Environment(\.editMode) private var editMode
-  @Query private var tasks: [Task]
-  @State private var isAddingNewTask: Bool = false
+  @Query private var feats: [Feat]
+  @State private var isAddingNewFeat: Bool = false
+  @StateObject private var sheet = SheetContext()
   
   /// Checklist associated with this view
   let checklist: Checklist
   
-  private var taskCount: Int { checklist.taskCount(for: modelContext) }
-  private var completedTaskCount: Int { checklist.completedTaskCount(for: modelContext) }
-  
-  private var isCompleted: Bool {
-    tasks.count > 0 && tasks.allSatisfy({ $0.isCompleted })
-  }
+  private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
   
   /// Creates a ChecklistView
   /// - Parameter checklist: Checklist to create the view for
   init(checklist: Checklist) {
     self.checklist = checklist
     
-    let id = checklist.id
-    let predicate = #Predicate<Task> { task in
-      task.checklist?.id == id
-    }
-    
-    _tasks = Query(filter: predicate, sort: [SortDescriptor(\.sortOrder)])
+    _feats = Query(filter: checklist.featsPredicate, sort: [SortDescriptor(\.sortOrder)])
   }
   
   var body: some View {
     ZStack {
-      VStack {
+      VStack(alignment: .leading) {
         header
           .padding(.horizontal)
         
-        tasksView
+        featsView
       }
       
-      if isAddingNewTask {
-        AddNewTaskView(checklist: checklist, isAddingNewTask: $isAddingNewTask)
+      if isAddingNewFeat {
+        AddNewFeatView(checklist: checklist, isAddingNewFeat: $isAddingNewFeat)
       }
     }
     .navigationTitle(checklist.name)
     .navigationBarTitleDisplayMode(.large)
     .toolbar { toolbar }
-    .onChange(of: isCompleted, initial: false) {
-      if isCompleted {
-        checklist.completionCount += 1
-      }
-    }
+    .sheet(sheet)
   }
   
   var header: some View {
     VStack(alignment: .leading) {
+      if isEditing {
+        Button {
+          sheet.present(AppSheet.editChecklist(checklist))
+        } label: {
+          Label("Edit List Info", systemImage: "pencil")
+        }
+      }
+      
       HStack {
         Text("Completions")
         
         Text("\(checklist.completionCount)")
           .highlighted()
       }
-      
-      ProgressView(value: Double(completedTaskCount), total: Double(max(taskCount, 1))) {
-        Text("Task Status")
-      } currentValueLabel: {
-        Text("\(completedTaskCount)/\(taskCount)")
-          .foregroundStyle(Color.accentColor)
-      }
     }
     .font(.subheadline)
   }
   
-  var tasksView: some View {
+  var featsView: some View {
     List {
       Section {
-        ForEach(tasks, id: \.self) { task in
-          TaskCellView(task: task)
-            .id(task.id)
+        ForEach(feats, id: \.self) { feat in
+          FeatCellView(feat: feat)
+            .id(feat.id)
+            .contextMenu { contextMenu(for: feat) }
         }
-        .onMove(perform: tasks.updateSortOrder)
+        .onMove(perform: feats.updateSortOrder)
         .onDelete(perform: deleteItems)
       } header: {
         Button {
@@ -98,12 +88,21 @@ struct ChecklistView: View {
           Text("Reset")
         }
         .textCase(nil)
-        .disabled(!tasks.contains(where: { $0.isCompleted }))
+        .disabled(!feats.contains(where: { $0.isCompleted }))
       }
       
-      if !isAddingNewTask {
-        addTaskButton        
+      if !isAddingNewFeat {
+        addFeatButton
       }
+    }
+  }
+  
+  @ViewBuilder
+  private func contextMenu(for feat: Feat) -> some View {
+    Button(role: .destructive) {
+      modelContext.delete(feat: feat)
+    } label: {
+      Label("Delete Task", systemImage: "trash")
     }
   }
   
@@ -111,14 +110,20 @@ struct ChecklistView: View {
   private var toolbar: some ToolbarContent {
     ToolbarItemGroup(placement: .topBarTrailing) {
       EditButton()
+      
+      Button {
+        isAddingNewFeat = true
+      } label: {
+        Label("Create New Checklist", systemImage: "plus")
+      }
     }
   }
   
   @ViewBuilder
-  private var addTaskButton: some View {
+  private var addFeatButton: some View {
     Button {
       withAnimation {
-        isAddingNewTask = true
+        isAddingNewFeat = true
       }
     } label: {
       Label("Create New Task", systemImage: "plus")
@@ -128,28 +133,28 @@ struct ChecklistView: View {
   private func deleteItems(offsets: IndexSet) {
     withAnimation {
       for index in offsets {
-        modelContext.delete(tasks[index])
+        modelContext.delete(feats[index])
       }
     }
   }
 }
 
-struct AddNewTaskView: View {
+struct AddNewFeatView: View {
   @Environment(\.modelContext) private var modelContext
-  @State private var newTaskName = ""
+  @State private var newFeatName = ""
   @FocusState private var isFocused: Bool
   
   let checklist: Checklist
-  let isAddingNewTask: Binding<Bool>
+  let isAddingNewFeat: Binding<Bool>
   
-  private var isAddableName: Bool { newTaskName.trimmingCharacters(in: .whitespaces).count > 0 }
+  private var isAddableName: Bool { newFeatName.trimmingCharacters(in: .whitespaces).count > 0 }
   
   var body: some View {
     VStack {
       Spacer()
       
       HStack {
-        TextField("Task Name", text: $newTaskName)
+        TextField("Task Name", text: $newFeatName)
           .focused($isFocused)
           .padding()
           .background(Color(UIColor.systemBackground))
@@ -158,17 +163,21 @@ struct AddNewTaskView: View {
             Capsule()
               .stroke(Color.accentColor, lineWidth: 3)
           )
-          .submitLabel(.done)
+          .submitLabel(.return)
           .onAppear {
             isFocused = true
           }
           .onSubmit {
-            addNewTask()
-            isAddingNewTask.wrappedValue = false
+            addNewFeat()
+            isAddingNewFeat.wrappedValue = false
           }
         
         Button {
-          addNewTask()
+          if isAddableName {
+            addNewFeat()
+          } else {
+            stopAddingNewFeat()
+          }
         } label: {
           Label("Add Task", systemImage: "arrow.up")
             .labelStyle(.iconOnly)
@@ -183,19 +192,29 @@ struct AddNewTaskView: View {
       }
       .padding()
     }
+    .contentShape(Rectangle())
+    .onTapGesture {
+      stopAddingNewFeat()
+    }
   }
   
-  private func addNewTask() {
-    let trimmedName = newTaskName.trimmingCharacters(in: .whitespaces)
+  private func addNewFeat() {
+    let trimmedName = newFeatName.trimmingCharacters(in: .whitespaces)
     guard trimmedName.count > 0 else {
       return
     }
     
-    let task = Task.newItem(named: trimmedName, for: modelContext)
+    let feat = Feat.newItem(named: trimmedName, for: modelContext)
     
     withAnimation {
-      checklist.add(task)
-      newTaskName = ""
+      checklist.add(feat)
+      newFeatName = ""
+    }
+  }
+  
+  private func stopAddingNewFeat() {
+    withAnimation {
+      isAddingNewFeat.wrappedValue = false
     }
   }
 }

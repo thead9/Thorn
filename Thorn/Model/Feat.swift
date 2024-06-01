@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  Feat.swift
 //  Thorn
 //
 //  Created by Thomas Headley on 2/26/24.
@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 /// A task to complete
-class Task: Identifiable, Sortable {
+class Feat: Identifiable, Sortable {
   /// Unique Identifier
   let id: UUID
   
@@ -26,9 +26,9 @@ class Task: Identifiable, Sortable {
   /// Indicates if the task is completed
   var isCompleted: Bool = false
     
-  /// Creates a task
+  /// Creates a feat
   /// - Parameters:
-  ///   - named: Name of the task
+  ///   - named: Name of the feat
   init(named name: String) {
     self.id = UUID()
     self.name = name
@@ -42,19 +42,19 @@ class Task: Identifiable, Sortable {
   /// - Returns: The task itself
   static func newItem(
     named name: String,
-    for context: ModelContext) -> Task {
-      let task = Task(named: name)
-      context.insert(task)
+    for context: ModelContext) -> Feat {
+      let feat = Feat(named: name)
+      context.insert(feat)
       
-      return task
+      return feat
     }
 }
 
 extension ModelContext {
   /// Deletes a task and all of its cascade relationships
   /// Ideally, this wouldn't be needed, but having issue with SwiftData automatically deleting
-  /// - Parameter task: Task to delete
-  func delete(task: Task) {
-    self.delete(task)
+  /// - Parameter feat: Feat to delete
+  func delete(feat: Feat) {
+    self.delete(feat)
   }
 }

@@ -1,0 +1,129 @@
+{
+  "identifier" : "8F7E6DBC",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6502416065",
+    "_developerTeamID" : "X94L6WV9DW",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 738032036.61473703,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21484771",
+      "localizations" : [
+
+      ],
+      "name" : "Check+",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "7.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6502965737",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : " Unlocks all features of Check & Check",
+              "displayName" : "Check+ (Annual)",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "check.plus.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Check+ (Annual)",
+          "subscriptionGroupID" : "21484771",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "0.99",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "6502416176",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlocks all features of Check & Check",
+              "displayName" : "Check+ (Monthly)",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "check.plus.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Check+ (Monthly)",
+          "subscriptionGroupID" : "21484771",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

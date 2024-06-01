@@ -10,10 +10,13 @@ import SwiftData
 
 @main
 struct ThornApp: App {
+  @StateObject
+  private var purchaseManager = PurchaseManager()
+  
   var sharedModelContainer: ModelContainer = {
     let schema = Schema([
       Checklist.self,
-      Task.self
+      Feat.self
     ])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     
@@ -27,7 +30,11 @@ struct ThornApp: App {
   var body: some Scene {
     WindowGroup {
       ThornView()
+        .modelContainer(sharedModelContainer)
+        .environmentObject(purchaseManager)
+        .task {
+          await purchaseManager.updatePurchasedProducts()
+        }
     }
-    .modelContainer(sharedModelContainer)
   }
 }

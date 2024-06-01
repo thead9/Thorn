@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C73201762BE1D45500DD4503 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73201752BE1D45500DD4503 /* SettingsView.swift */; };
+		C732017A2BEC11F700DD4503 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73201792BEC11F700DD4503 /* PurchaseManager.swift */; };
+		C732017C2BEC12E300DD4503 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732017B2BEC12E300DD4503 /* PaywallView.swift */; };
 		C73963BF2BDC8CF600C22904 /* AppSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73963BE2BDC8CF600C22904 /* AppSheet.swift */; };
 		C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FAC2B898095001B6DD6 /* ThornApp.swift */; };
 		C7519FB32B898097001B6DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7519FB22B898097001B6DD6 /* Assets.xcassets */; };
@@ -18,16 +21,18 @@
 		C7519FE02B8A68DD001B6DD6 /* CheckListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */; };
 		C7519FE32B8D8395001B6DD6 /* ThornView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE22B8D8395001B6DD6 /* ThornView.swift */; };
 		C7519FE52B8D85D2001B6DD6 /* ChecklistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE42B8D85D2001B6DD6 /* ChecklistCellView.swift */; };
-		C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Task.swift */; };
+		C7519FE72B8D88B6001B6DD6 /* Feat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Feat.swift */; };
 		C7519FEB2B8E8C0D001B6DD6 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */; };
-		C7519FEC2B8E8C99001B6DD6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Task.swift */; };
+		C7519FEC2B8E8C99001B6DD6 /* Feat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FE62B8D88B6001B6DD6 /* Feat.swift */; };
 		C7519FEE2B92721D001B6DD6 /* ModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */; };
 		C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */; };
 		C7519FF42B980905001B6DD6 /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7519FF32B980905001B6DD6 /* ChecklistView.swift */; };
 		C76E6F502B996ADD00AAD00F /* Sortable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F4F2B996ADD00AAD00F /* Sortable.swift */; };
-		C76E6F522B9AB43200AAD00F /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F512B9AB43200AAD00F /* TaskCellView.swift */; };
+		C76E6F522B9AB43200AAD00F /* FeatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76E6F512B9AB43200AAD00F /* FeatCellView.swift */; };
 		C7AA3CDC2BB3B60A004E7F7E /* ChecklistModView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AA3CDB2BB3B60A004E7F7E /* ChecklistModView.swift */; };
 		C7AA3CE02BB3BCAA004E7F7E /* Firnen in Frameworks */ = {isa = PBXBuildFile; productRef = C7AA3CDF2BB3BCAA004E7F7E /* Firnen */; };
+		C7BE92ED2C05254E006B4C7B /* CheckPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE92EC2C05254E006B4C7B /* CheckPlus.swift */; };
+		C7BE92EF2C0BCCD4006B4C7B /* DetailPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE92EE2C0BCCD4006B4C7B /* DetailPlaceholderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C73201752BE1D45500DD4503 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C73201772BEC10DB00DD4503 /* Check+.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Check+.storekit"; path = "Thorn/Check+.storekit"; sourceTree = "<group>"; };
+		C73201792BEC11F700DD4503 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		C732017B2BEC12E300DD4503 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		C73963BE2BDC8CF600C22904 /* AppSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSheet.swift; sourceTree = "<group>"; };
 		C7519FA92B898095001B6DD6 /* Thorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7519FAC2B898095001B6DD6 /* ThornApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornApp.swift; sourceTree = "<group>"; };
@@ -63,14 +72,16 @@
 		C7519FDF2B8A68DD001B6DD6 /* CheckListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListTests.swift; sourceTree = "<group>"; };
 		C7519FE22B8D8395001B6DD6 /* ThornView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThornView.swift; sourceTree = "<group>"; };
 		C7519FE42B8D85D2001B6DD6 /* ChecklistCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCellView.swift; sourceTree = "<group>"; };
-		C7519FE62B8D88B6001B6DD6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C7519FE62B8D88B6001B6DD6 /* Feat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feat.swift; sourceTree = "<group>"; };
 		C7519FEA2B8E8C0D001B6DD6 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		C7519FED2B92721D001B6DD6 /* ModelUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUtilities.swift; sourceTree = "<group>"; };
 		C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistsView.swift; sourceTree = "<group>"; };
 		C7519FF32B980905001B6DD6 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		C76E6F4F2B996ADD00AAD00F /* Sortable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sortable.swift; sourceTree = "<group>"; };
-		C76E6F512B9AB43200AAD00F /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
+		C76E6F512B9AB43200AAD00F /* FeatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatCellView.swift; sourceTree = "<group>"; };
 		C7AA3CDB2BB3B60A004E7F7E /* ChecklistModView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistModView.swift; sourceTree = "<group>"; };
+		C7BE92EC2C05254E006B4C7B /* CheckPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPlus.swift; sourceTree = "<group>"; };
+		C7BE92EE2C0BCCD4006B4C7B /* DetailPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +110,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C73201782BEC11E800DD4503 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C73201792BEC11F700DD4503 /* PurchaseManager.swift */,
+				C7BE92EC2C05254E006B4C7B /* CheckPlus.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		C7519FA02B898095001B6DD6 = {
 			isa = PBXGroup;
 			children = (
+				C73201772BEC10DB00DD4503 /* Check+.storekit */,
 				C7519FAB2B898095001B6DD6 /* Thorn */,
 				C7519FC02B898097001B6DD6 /* ThornTests */,
 				C7519FCA2B898097001B6DD6 /* ThornUITests */,
@@ -126,6 +147,7 @@
 				C7519FE22B8D8395001B6DD6 /* ThornView.swift */,
 				C7519FE12B8D7ED2001B6DD6 /* View */,
 				C7519FDA2B89843F001B6DD6 /* Model */,
+				C73201782BEC11E800DD4503 /* Store */,
 				C7519FB22B898097001B6DD6 /* Assets.xcassets */,
 				C7519FB72B898097001B6DD6 /* Thorn.entitlements */,
 				C7519FB82B898097001B6DD6 /* Info.plist */,
@@ -163,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				C7519FDB2B89845E001B6DD6 /* Checklist.swift */,
-				C7519FE62B8D88B6001B6DD6 /* Task.swift */,
+				C7519FE62B8D88B6001B6DD6 /* Feat.swift */,
 				C76E6F4F2B996ADD00AAD00F /* Sortable.swift */,
 			);
 			path = Model;
@@ -186,8 +208,11 @@
 				C7AA3CDB2BB3B60A004E7F7E /* ChecklistModView.swift */,
 				C7519FF12B96BFDA001B6DD6 /* ChecklistsView.swift */,
 				C7519FF32B980905001B6DD6 /* ChecklistView.swift */,
-				C76E6F512B9AB43200AAD00F /* TaskCellView.swift */,
+				C76E6F512B9AB43200AAD00F /* FeatCellView.swift */,
 				C73963BE2BDC8CF600C22904 /* AppSheet.swift */,
+				C73201752BE1D45500DD4503 /* SettingsView.swift */,
+				C732017B2BEC12E300DD4503 /* PaywallView.swift */,
+				C7BE92EE2C0BCCD4006B4C7B /* DetailPlaceholderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -328,16 +353,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7BE92ED2C05254E006B4C7B /* CheckPlus.swift in Sources */,
 				C7519FE32B8D8395001B6DD6 /* ThornView.swift in Sources */,
 				C7519FF22B96BFDA001B6DD6 /* ChecklistsView.swift in Sources */,
 				C73963BF2BDC8CF600C22904 /* AppSheet.swift in Sources */,
 				C7519FDC2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FF42B980905001B6DD6 /* ChecklistView.swift in Sources */,
-				C7519FE72B8D88B6001B6DD6 /* Task.swift in Sources */,
+				C7519FE72B8D88B6001B6DD6 /* Feat.swift in Sources */,
+				C7BE92EF2C0BCCD4006B4C7B /* DetailPlaceholderView.swift in Sources */,
 				C76E6F502B996ADD00AAD00F /* Sortable.swift in Sources */,
+				C732017C2BEC12E300DD4503 /* PaywallView.swift in Sources */,
+				C732017A2BEC11F700DD4503 /* PurchaseManager.swift in Sources */,
 				C7519FAD2B898095001B6DD6 /* ThornApp.swift in Sources */,
 				C7519FE52B8D85D2001B6DD6 /* ChecklistCellView.swift in Sources */,
-				C76E6F522B9AB43200AAD00F /* TaskCellView.swift in Sources */,
+				C73201762BE1D45500DD4503 /* SettingsView.swift in Sources */,
+				C76E6F522B9AB43200AAD00F /* FeatCellView.swift in Sources */,
 				C7AA3CDC2BB3B60A004E7F7E /* ChecklistModView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7519FEC2B8E8C99001B6DD6 /* Task.swift in Sources */,
+				C7519FEC2B8E8C99001B6DD6 /* Feat.swift in Sources */,
 				C7519FEE2B92721D001B6DD6 /* ModelUtilities.swift in Sources */,
 				C7519FDD2B89845E001B6DD6 /* Checklist.swift in Sources */,
 				C7519FE02B8A68DD001B6DD6 /* CheckListTests.swift in Sources */,
@@ -514,6 +544,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -523,6 +554,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasheadley.Thorn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -545,6 +579,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -554,6 +589,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasheadley.Thorn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -13,14 +13,24 @@ import SwiftUI
 struct ChecklistCellView: View {
   @Environment(\.modelContext) private var modelContext
   @Environment(\.editMode) private var editMode
-  @StateObject private var sheet = SheetContext()
+  @Query private var feats: [Feat]
   
-  private var taskCount: Int { checklist.taskCount(for: modelContext) }
-  private var completedTaskCount: Int { checklist.completedTaskCount(for: modelContext) }
+  private var featCount: Int { feats.count }
+  private var completedFeatCount: Int { feats.filter({ $0.isCompleted }).count }
   private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
   
   /// Checklist this view is associated with
   var checklist: Checklist
+  
+  /// Sheet context for displaying sheets
+  var sheet: SheetContext
+  
+  init(checklist: Checklist, sheet: SheetContext) {
+    self.checklist = checklist
+    self.sheet = sheet
+    
+    _feats = Query(filter: checklist.featsPredicate)
+  }
     
   var body: some View {
     HStack {
@@ -31,7 +41,6 @@ struct ChecklistCellView: View {
       }
     }
     .padding(.vertical, 10)
-    .sheet(sheet)
   }
   
   var editButton: some View {
@@ -60,10 +69,10 @@ struct ChecklistCellView: View {
           .highlighted()
       }
       
-      ProgressView(value: Double(completedTaskCount), total: Double(max(taskCount, 1))) {
+      ProgressView(value: Double(completedFeatCount), total: Double(max(featCount, 1))) {
         Text("Task Status")
       } currentValueLabel: {
-        Text("\(completedTaskCount)/\(taskCount)")
+        Text("\(completedFeatCount)/\(featCount)")
           .foregroundStyle(Color.accentColor)
       }
       .font(.caption)

@@ -12,6 +12,8 @@ enum AppSheet: SheetProvider {
   
   case addChecklist
   case editChecklist(_ checklist: Checklist)
+  case settings
+  case paywall
   
   var sheet: AnyView {
     NavigationStack {
@@ -20,6 +22,10 @@ enum AppSheet: SheetProvider {
         ChecklistModView(.add)
       case .editChecklist(let checklist):
         ChecklistModView(.edit(checklist))
+      case .settings:
+        SettingsView()
+      case .paywall:
+        PaywallView()
       }
     }.any()
   }

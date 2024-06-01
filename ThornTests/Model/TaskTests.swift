@@ -9,12 +9,12 @@ import XCTest
 import SwiftData
 @testable import Thorn
 
-final class TaskTests: XCTestCase {
+final class FeatTests: XCTestCase {
   func testInit() {
     func expect(name: String) {
-      let task = Task(named: name)
+      let feat = Feat(named: name)
       
-      XCTAssertEqual(name, task.name)
+      XCTAssertEqual(name, feat.name)
     }
     
     expect(name: "Test")
@@ -25,28 +25,28 @@ final class TaskTests: XCTestCase {
     @MainActor func expect(count: Int) {
       let container = ModelUtilities.getTestModelContainer()
       for x in 1...count {
-        Task.newItem(named: "\(x)", for: container.mainContext)
+        Feat.newItem(named: "\(x)", for: container.mainContext)
       }
       
-      let descriptor = FetchDescriptor<Task>()
-      let taskCount = try! container.mainContext.fetchCount(descriptor)
+      let descriptor = FetchDescriptor<Feat>()
+      let featCount = try! container.mainContext.fetchCount(descriptor)
       
-      XCTAssertEqual(count, taskCount)
+      XCTAssertEqual(count, featCount)
     }
     
     expect(count: 1)
     expect(count: 5)
   }
   
-  @MainActor func testDeleteTask() {
+  @MainActor func testDeleteFeat() {
     let container = ModelUtilities.getTestModelContainer()
-    let task = Task.newItem(named: "name", for: container.mainContext)
+    let feat = Feat.newItem(named: "name", for: container.mainContext)
     
-    container.mainContext.delete(task: task)
+    container.mainContext.delete(feat: feat)
     
-    let taskDescriptor = FetchDescriptor<Task>()
-    let taskCount = try! container.mainContext.fetchCount(taskDescriptor)
+    let featDescriptor = FetchDescriptor<Feat>()
+    let featCount = try! container.mainContext.fetchCount(featDescriptor)
     
-    XCTAssertEqual(0, taskCount)
+    XCTAssertEqual(0, featCount)
   }
 }

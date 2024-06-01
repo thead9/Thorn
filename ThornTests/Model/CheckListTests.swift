@@ -43,17 +43,17 @@ final class CheckListTests: XCTestCase {
     expect(count: 5)
   }
   
-  @MainActor func testAddTask() {
+  @MainActor func testAddFeat() {
     @MainActor func expect(count: Int) {
       let container = ModelUtilities.getTestModelContainer()
       let checklist = Checklist.newItem(named: "name", for: container.mainContext)
       
       for x in 0..<count {
-        let task = Task.newItem(named: "\(x)", for: container.mainContext)
+        let task = Feat.newItem(named: "\(x)", for: container.mainContext)
         checklist.add(task)
       }
       
-      XCTAssertEqual(count, checklist.tasks.count)
+      XCTAssertEqual(count, checklist.feats.count)
     }
     
     expect(count: 0)
@@ -61,18 +61,18 @@ final class CheckListTests: XCTestCase {
     expect(count: 5)
   }
   
-  @MainActor func testRemoveTask() {
+  @MainActor func testRemoveFeat() {
     @MainActor func expect(count: Int) {
       let container = ModelUtilities.getTestModelContainer()
       let checklist = Checklist.newItem(named: "name", for: container.mainContext)
       
       for x in 0..<count {
-        let task = Task.newItem(named: "\(x)", for: container.mainContext)
-        checklist.add(task)
-        checklist.remove(task)
+        let feat = Feat.newItem(named: "\(x)", for: container.mainContext)
+        checklist.add(feat)
+        checklist.remove(feat)
       }
       
-      XCTAssertEqual(0, checklist.tasks.count)
+      XCTAssertEqual(0, checklist.feats.count)
       
       
     }
@@ -82,25 +82,25 @@ final class CheckListTests: XCTestCase {
     expect(count: 5)
   }
   
-  @MainActor func testRemoveTaskNotPartOfChecklist() {
+  @MainActor func testRemoveFeatNotPartOfChecklist() {
     let container = ModelUtilities.getTestModelContainer()
     let checklist = Checklist.newItem(named: "name", for: container.mainContext)
     
-    let task = Task.newItem(named: "1", for: container.mainContext)
-    checklist.add(task)
+    let feat = Feat.newItem(named: "1", for: container.mainContext)
+    checklist.add(feat)
     
-    let task2 = Task.newItem(named: "2", for: container.mainContext)
-    checklist.remove(task2)
+    let feat2 = Feat.newItem(named: "2", for: container.mainContext)
+    checklist.remove(feat)
     
-    XCTAssertEqual(1, checklist.tasks.count)
+    XCTAssertEqual(1, checklist.feats.count)
   }
   
-  @MainActor func testDeleteChecklistWithTask() {
+  @MainActor func testDeleteChecklistWithFeat() {
     let container = ModelUtilities.getTestModelContainer()
     let checklist = Checklist.newItem(named: "name", for: container.mainContext)
     
-    let task = Task.newItem(named: "task", for: container.mainContext)
-    checklist.add(task)
+    let feat = Feat.newItem(named: "feat", for: container.mainContext)
+    checklist.add(feat)
     
     container.mainContext.delete(checklist: checklist)
     
@@ -109,9 +109,9 @@ final class CheckListTests: XCTestCase {
     
     XCTAssertEqual(0, checklistCount)
     
-    let taskDescriptor = FetchDescriptor<Task>()
-    let taskCount = try! container.mainContext.fetchCount(taskDescriptor)
+    let featDescriptor = FetchDescriptor<Feat>()
+    let featCount = try! container.mainContext.fetchCount(featDescriptor)
     
-    XCTAssertEqual(0, taskCount)
+    XCTAssertEqual(0, featCount)
   }
 }
