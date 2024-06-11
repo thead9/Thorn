@@ -12,20 +12,20 @@ import SwiftData
 /// A checklist to track completing certain tasks
 class Checklist: Identifiable {
   /// Unique Identifier
-  let id: UUID
+  let id: UUID = UUID()
   
   /// Name of the checklist
-  var name: String
+  var name: String = "--"
   
   /// The date the checklist was created
-  var dateCreated: Date
+  var dateCreated: Date = Date.now
   
   /// Number of times this checklist has been completed
-  var completionCount: Int
+  var completionCount: Int = 0
 
   @Relationship(deleteRule: .cascade, inverse: \Feat.checklist)
   /// Tasks associated with this checklist
-  var feats: [Feat]
+  var feats: [Feat]?
   
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
@@ -53,30 +53,30 @@ class Checklist: Identifiable {
   /// Adds a feat to this checklist
   /// - Parameter task: Task to add
   func add(_ feat: Feat) {
-    let maxSortOrder = feats.map({ $0.sortOrder }).max()
+    let maxSortOrder = feats?.map({ $0.sortOrder }).max()
     if let maxSortOrder {
       feat.sortOrder = maxSortOrder + 1
     }
-    feats.append(feat)
+    feats?.append(feat)
   }
   
   /// Removes a task from this checklist
   /// - Parameter feat: Task to remove
   func remove(_ feat: Feat) {
-    if let index = feats.firstIndex(of: feat) {
-      feats.remove(at: index)
+    if let index = feats?.firstIndex(of: feat) {
+      feats?.remove(at: index)
     }
   }
   
   /// Resets the completion status of tasks
   func reset() {
-    for feat in feats {
+    for feat in feats ?? [] {
       feat.isCompleted = false
     }
   }
   
   func completionCheck() {
-    if feats.count > 0 && feats.allSatisfy({ $0.isCompleted }) {
+    if (feats?.count ?? 0) > 0 && (feats?.allSatisfy({ $0.isCompleted }) ?? false) {
       completionCount += 1
     }
   }
@@ -100,7 +100,7 @@ extension ModelContext {
   /// Ideally, this wouldn't be needed, but having issue with SwiftData automatically deleting
   /// - Parameter checklist: Checklist to delete
   func delete(checklist: Checklist) {
-    for feat in checklist.feats {
+    for feat in checklist.feats ?? [] {
       self.delete(feat)
     }
     

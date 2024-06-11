@@ -12,6 +12,6 @@ struct CheckPlus {
   static let annualID = "check.plus.annual"
   static let freeLists = 3
   
-  static let privacyPolicy = "https://www.apple.com"
-  static let termsOfUse = "https://www.apple.com"
+  static let privacyPolicy = "https://circularcoding.notion.site/Check-Check-Privacy-Policy-a461ac54516243cc8e7f51dbd68d5b9c"
+  static let termsOfUse = "https://circularcoding.notion.site/Check-Check-Terms-Conditions-29aa9ce615eb4371bf19557f4edda5eb"
 }

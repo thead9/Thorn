@@ -12,10 +12,10 @@ import SwiftData
 /// A task to complete
 class Feat: Identifiable, Sortable {
   /// Unique Identifier
-  let id: UUID
+  let id: UUID = UUID()
   
   /// Name of the task
-  var name: String
+  var name: String = "--"
   
   /// Checklist associated with task
   var checklist: Checklist?
