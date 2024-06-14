@@ -14,7 +14,6 @@ class PurchaseManager: ObservableObject {
   
   @Published private(set) var products: [Product] = []
   @Published private(set) var purchasedProductIDs = Set<String>()
-  private var productsLoaded = false
   private var updates: Task<Void, Never>? = nil
   
   var monthly: Product? {
@@ -39,37 +38,6 @@ class PurchaseManager: ObservableObject {
   
   var hasUnlockedPlus: Bool {
     return !self.purchasedProductIDs.isEmpty
-  }
-  
-  func loadProducts() async throws {
-    guard !self.productsLoaded else {
-      return
-    }
-    
-    self.products = try await Product.products(for: productIDs)
-    self.productsLoaded = true
-  }
-  
-  func purchase(_ product: Product) async throws {
-    let result = try await product.purchase()
-    
-    switch result {
-    case .success(let verificationResult):
-      switch verificationResult {
-      case .unverified(let signedType, _):
-        await signedType.finish()
-        await updatePurchasedProducts()
-      case .verified(let signedType):
-        await signedType.finish()
-        await updatePurchasedProducts()
-      }
-    case .userCancelled:
-      break
-    case .pending:
-      break
-    @unknown default:
-      break
-    }
   }
   
   func updatePurchasedProducts() async {

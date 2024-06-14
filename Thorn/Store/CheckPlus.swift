@@ -8,6 +8,7 @@
 import Foundation
 
 struct CheckPlus {
+  static let subscriptionGroupIP = "21484771"
   static let monthlyID = "check.plus.monthly"
   static let annualID = "check.plus.annual"
   static let freeLists = 3

@@ -14,9 +14,7 @@ struct ChecklistCellView: View {
   @Environment(\.modelContext) private var modelContext
   @Environment(\.editMode) private var editMode
   @Query private var feats: [Feat]
-  
-  private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
-  
+    
   /// Checklist this view is associated with
   var checklist: Checklist
   
@@ -31,35 +29,11 @@ struct ChecklistCellView: View {
   }
     
   var body: some View {
-    HStack {
-      mainCell
-      
-      if isEditing {
-        editButton
-      }
-    }
-    .padding(.vertical, 10)
-  }
-  
-  var editButton: some View {
-    Button {
-      sheet.present(AppSheet.editChecklist(checklist))
-    } label: {
-      Label("Edit Checklist", systemImage: "pencil.circle")
-        .labelStyle(.iconOnly)
-        .foregroundColor(Color.accentColor)
-        .imageScale(.large)
-    }
-  }
-  
-  var mainCell: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(checklist.name)
         .font(.title2)
         .fontWeight(.bold)
-      
-      Divider()
-      
+            
       HStack {
         Text("Completions")
         
@@ -75,5 +49,6 @@ struct ChecklistCellView: View {
       }
       .font(.caption)
     }
+    .padding(.vertical, 10)
   }
 }

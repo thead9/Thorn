@@ -48,7 +48,7 @@ class Checklist: Identifiable {
       return 0
     }
   }
-  
+    
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
   init(named name: String) {

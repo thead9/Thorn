@@ -17,15 +17,24 @@ struct ChecklistsView: View {
   @Query private var checklists: [Checklist]
   @Query private var feats: [Feat]
   @StateObject private var sheet = SheetContext()
-  
-  private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
-  
+    
   var body: some View {
     List {
       ForEach(checklists, id: \.self) { checklist in
-        ChecklistNavigationLink(checklist: checklist, sheet: sheet)
-          .separatedCell()
+        if editMode?.wrappedValue.isEditing == true {
+          Button {
+            sheet.present(AppSheet.editChecklist(checklist))
+          } label: {
+            ChecklistCellView(checklist: checklist, sheet: sheet)
+          }
+          .buttonStyle(.plain)
+        }
+        else {
+          NavigationLink(value: checklist) {
+            ChecklistCellView(checklist: checklist, sheet: sheet)
+          }
           .contextMenu { contextMenu(for: checklist) }
+        }
       }
       .onDelete(perform: deleteItems)
       
@@ -93,29 +102,6 @@ struct ChecklistsView: View {
       for index in offsets {
         modelContext.delete(checklists[index])
       }
-    }
-  }
-}
-
-/// Oddly needed because isEditing doesn't appear to change when this is in its parent view
-private struct ChecklistNavigationLink: View {
-  @Environment(\.editMode) private var editMode
-  
-  private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
-  
-  /// Checklist for the navigation link
-  let checklist: Checklist
-  
-  /// Sheet context for displaying sheets for this cell
-  let sheet: SheetContext
-  
-  var body: some View {
-    if !isEditing {
-      NavigationLink(value: checklist) {
-        ChecklistCellView(checklist: checklist, sheet: sheet)
-      }
-    } else {
-      ChecklistCellView(checklist: checklist, sheet: sheet)
     }
   }
 }
