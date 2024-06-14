@@ -51,6 +51,14 @@ struct ChecklistView: View {
   
   var header: some View {
     VStack(alignment: .leading) {
+      if isEditing {
+        Button {
+          sheet.present(AppSheet.editChecklist(checklist))
+        } label: {
+          Label("Edit List Info", systemImage: "pencil")
+        }
+      }
+      
       HStack {
         Text("Completions")
         
