@@ -27,6 +27,28 @@ class Checklist: Identifiable {
   /// Tasks associated with this checklist
   var feats: [Feat]?
   
+  var featCountExp: Int {
+    do {
+      return try #Expression<[Feat], Int> { feats in
+        feats.count
+      }.evaluate(feats ?? [])
+    } catch {
+      return 0
+    }
+  }
+  
+  var completedFeatCountExp: Int {
+    do {
+      return try #Expression<[Feat], Int> { feats in
+        feats.filter {
+          $0.isCompleted
+        }.count
+      }.evaluate(feats ?? [])
+    } catch {
+      return 0
+    }
+  }
+  
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
   init(named name: String) {

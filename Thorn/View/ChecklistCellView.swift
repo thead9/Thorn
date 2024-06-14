@@ -15,8 +15,6 @@ struct ChecklistCellView: View {
   @Environment(\.editMode) private var editMode
   @Query private var feats: [Feat]
   
-  private var featCount: Int { feats.count }
-  private var completedFeatCount: Int { feats.filter({ $0.isCompleted }).count }
   private var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
   
   /// Checklist this view is associated with
@@ -69,10 +67,10 @@ struct ChecklistCellView: View {
           .highlighted()
       }
       
-      ProgressView(value: Double(completedFeatCount), total: Double(max(featCount, 1))) {
+      ProgressView(value: Double(checklist.completedFeatCountExp), total: Double(max(checklist.featCountExp, 1))) {
         Text("Task Status")
       } currentValueLabel: {
-        Text("\(completedFeatCount)/\(featCount)")
+        Text("\(checklist.completedFeatCountExp)/\(checklist.featCountExp)")
           .foregroundStyle(Color.accentColor)
       }
       .font(.caption)
