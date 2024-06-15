@@ -12,7 +12,6 @@ import SwiftUI
 /// View for displaying checklists
 struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
-  @Environment(\.editMode) private var editMode
   @EnvironmentObject private var purchaseManager: PurchaseManager
   @Query private var checklists: [Checklist]
   @Query private var feats: [Feat]
@@ -21,19 +20,14 @@ struct ChecklistsView: View {
   var body: some View {
     List {
       ForEach(checklists, id: \.self) { checklist in
-        if editMode?.wrappedValue.isEditing == true {
-          Button {
-            sheet.present(AppSheet.editChecklist(checklist))
-          } label: {
-            ChecklistCellView(checklist: checklist, sheet: sheet)
-          }
-          .buttonStyle(.plain)
+        NavigationLink(value: checklist) {
+          ChecklistCellView(checklist: checklist, sheet: sheet)
         }
-        else {
-          NavigationLink(value: checklist) {
-            ChecklistCellView(checklist: checklist, sheet: sheet)
-          }
-          .contextMenu { contextMenu(for: checklist) }
+        .contextMenu { contextMenu(for: checklist) }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+          resetChecklistButton(for: checklist)
+            .tint(.accentColor)
+          editChecklistButton(for: checklist)
         }
       }
       .onDelete(perform: deleteItems)
@@ -83,13 +77,26 @@ struct ChecklistsView: View {
     Button {
       sheet.present(AppSheet.editChecklist(checklist))
     } label: {
-      Label("Edit Checklist", systemImage: "pencil.circle")
+      Label("Edit", systemImage: "pencil")
+    }
+  }
+  
+  @ViewBuilder
+  private func resetChecklistButton(for checklist: Checklist) -> some View {
+    Button {
+      checklist.reset()
+    } label: {
+      Label("Reset", systemImage: "arrow.uturn.backward")
     }
   }
   
   @ViewBuilder
   private func contextMenu(for checklist: Checklist) -> some View {
     editChecklistButton(for: checklist)
+    resetChecklistButton(for: checklist)
+    
+    Divider()
+    
     Button(role: .destructive) {
       modelContext.delete(checklist: checklist)
     } label: {
