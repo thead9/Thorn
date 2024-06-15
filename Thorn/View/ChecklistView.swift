@@ -31,22 +31,18 @@ struct ChecklistView: View {
   }
   
   var body: some View {
-    ZStack {
+    ScrollViewReader { proxy in
       VStack(alignment: .leading) {
         header
           .padding(.horizontal)
         
-        featsView
+        featsList
       }
-      
-      if isAddingNewFeat {
-        AddNewFeatView(checklist: checklist, isAddingNewFeat: $isAddingNewFeat)
-      }
+      .navigationTitle(checklist.name)
+      .navigationBarTitleDisplayMode(.large)
+      .toolbar { toolbar(proxy) }
+      .sheet(sheet)
     }
-    .navigationTitle(checklist.name)
-    .navigationBarTitleDisplayMode(.large)
-    .toolbar { toolbar }
-    .sheet(sheet)
   }
   
   var header: some View {
@@ -69,7 +65,7 @@ struct ChecklistView: View {
     .font(.subheadline)
   }
   
-  var featsView: some View {
+  var featsList: some View {
     List {
       Section {
         ForEach(feats, id: \.self) { feat in
@@ -80,23 +76,24 @@ struct ChecklistView: View {
         .onMove(perform: feats.updateSortOrder)
         .onDelete(perform: deleteItems)
       } header: {
-        Button {
-          withAnimation {
-            checklist.reset()
+        HStack {
+          Button {
+            withAnimation {
+              checklist.reset()
+            }
+          } label: {
+            Text("Reset")
           }
-        } label: {
-          Text("Reset")
+          .disabled(!feats.contains(where: { $0.isCompleted }))
         }
         .textCase(nil)
-        .disabled(!feats.contains(where: { $0.isCompleted }))
       }
       
-      if !isAddingNewFeat {
-        addFeatButton
-      }
+      AddNewFeatView(isAddingNewFeat: $isAddingNewFeat, checklist: checklist)
+        .id("Add")
     }
   }
-  
+    
   @ViewBuilder
   private func contextMenu(for feat: Feat) -> some View {
     Button(role: .destructive) {
@@ -107,26 +104,18 @@ struct ChecklistView: View {
   }
   
   @ToolbarContentBuilder
-  private var toolbar: some ToolbarContent {
+  private func toolbar(_ proxy: ScrollViewProxy) -> some ToolbarContent {
     ToolbarItemGroup(placement: .topBarTrailing) {
       EditButton()
       
       Button {
-        isAddingNewFeat = true
+        withAnimation {
+          isAddingNewFeat = true
+          proxy.scrollTo("Add")
+        }
       } label: {
         Label("Create New Checklist", systemImage: "plus")
       }
-    }
-  }
-  
-  @ViewBuilder
-  private var addFeatButton: some View {
-    Button {
-      withAnimation {
-        isAddingNewFeat = true
-      }
-    } label: {
-      Label("Create New Task", systemImage: "plus")
     }
   }
   
@@ -139,62 +128,44 @@ struct ChecklistView: View {
   }
 }
 
-struct AddNewFeatView: View {
+fileprivate struct AddNewFeatView: View {
   @Environment(\.modelContext) private var modelContext
-  @State private var newFeatName = ""
+  @Binding var isAddingNewFeat: Bool
+  @State private var newFeatName: String = ""
   @FocusState private var isFocused: Bool
-  
+
   let checklist: Checklist
-  let isAddingNewFeat: Binding<Bool>
-  
-  private var isAddableName: Bool { newFeatName.trimmingCharacters(in: .whitespaces).count > 0 }
   
   var body: some View {
-    VStack {
-      Spacer()
-      
-      HStack {
-        TextField("Task Name", text: $newFeatName)
-          .focused($isFocused)
-          .padding()
-          .background(Color(UIColor.systemBackground))
-          .clipShape(Capsule())
-          .overlay(
-            Capsule()
-              .stroke(Color.accentColor, lineWidth: 3)
-          )
+    if isAddingNewFeat {
+      Section {
+        TextField("New Task Name", text: $newFeatName)
           .submitLabel(.return)
-          .onAppear {
+          .focused($isFocused)
+          .onSubmit {
+            addNewFeat ()
+          }
+          .onAppear{
             isFocused = true
           }
-          .onSubmit {
-            addNewFeat()
-            isAddingNewFeat.wrappedValue = false
+      } header: {
+        HStack {
+          Button {
+            reset()
+          } label: {
+            Text("Cancel")
           }
-        
-        Button {
-          if isAddableName {
-            addNewFeat()
-          } else {
-            stopAddingNewFeat()
-          }
-        } label: {
-          Label("Add Task", systemImage: "arrow.up")
-            .labelStyle(.iconOnly)
-            .imageScale(.large)
-            .rotationEffect(.degrees(isAddableName ? 0 : 180))
-            .animation(.easeInOut, value: isAddableName)
         }
-        .padding()
-        .foregroundColor(.primary)
-        .background(Color.accentColor)
-        .clipShape(Circle())
+        .textCase(nil)
       }
-      .padding()
-    }
-    .contentShape(Rectangle())
-    .onTapGesture {
-      stopAddingNewFeat()
+    } else {
+      Button {
+        withAnimation {
+          isAddingNewFeat = true
+        }
+      } label: {
+        Label("Create New Task", systemImage: "plus")
+      }
     }
   }
   
@@ -208,13 +179,14 @@ struct AddNewFeatView: View {
     
     withAnimation {
       checklist.add(feat)
-      newFeatName = ""
+      reset()
     }
   }
   
-  private func stopAddingNewFeat() {
+  private func reset() {
     withAnimation {
-      isAddingNewFeat.wrappedValue = false
+      newFeatName = ""
+      isAddingNewFeat = false
     }
   }
 }
