@@ -13,11 +13,33 @@ import SwiftUI
 struct ChecklistsView: View {
   @Environment(\.modelContext) private var modelContext
   @EnvironmentObject private var purchaseManager: PurchaseManager
-  @Query private var checklists: [Checklist]
+  @Query(sort: [
+    SortDescriptor(\Checklist.sortOrder, order: .reverse),
+    SortDescriptor(\Checklist.dateCreated)]) private var checklists: [Checklist]
   @Query private var feats: [Feat]
   @StateObject private var sheet = SheetContext()
     
   var body: some View {
+    VStack {
+      if !checklists.isEmpty {
+        checklistCells
+      } else {
+        VStack(spacing: 15) {
+          Image(systemName: "checklist")
+            .font(.system(size: 100))
+            .padding(.bottom)
+          
+          addChecklistButton
+            .font(.title)
+        }
+      }
+    }
+    .navigationDestination(for: Checklist.self) { ChecklistView(checklist: $0) }
+    .toolbar { toolbar }
+    .sheet(sheet)
+  }
+  
+  var checklistCells: some View {
     List {
       ForEach(checklists, id: \.self) { checklist in
         NavigationLink(value: checklist) {
@@ -30,6 +52,7 @@ struct ChecklistsView: View {
           editChecklistButton(for: checklist)
         }
       }
+      .onMove(perform: checklists.updateSortOrder)
       .onDelete(perform: deleteItems)
       
       Section {
@@ -37,9 +60,6 @@ struct ChecklistsView: View {
           .foregroundStyle(Color.accentColor)
       }
     }
-    .navigationDestination(for: Checklist.self) { ChecklistView(checklist: $0) }
-    .toolbar { toolbar }
-    .sheet(sheet)
   }
   
   @ToolbarContentBuilder

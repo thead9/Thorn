@@ -34,9 +34,6 @@ struct FeatCellView: View {
         .onTapGesture {
           withAnimation {
             feat.isCompleted.toggle()
-            if feat.isCompleted {
-              feat.checklist?.completionCheck()              
-            }
           }
         }
       

@@ -28,11 +28,12 @@ extension Array where Element: Sortable {
     // update the userOrder attribute in revisedItems to
     // persist the new order. This is done in reverse order
     // to minimize changes to the indices.
+    var sortOrder = 0
     for reverseIndex in stride( from: revisedItems.count - 1,
                                 through: 0,
-                                by: -1 )
-    {
-      revisedItems[reverseIndex].sortOrder = reverseIndex
+                                by: -1 ) {
+      revisedItems[reverseIndex].sortOrder = sortOrder
+      sortOrder += 1
     }
   }
 }

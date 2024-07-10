@@ -33,14 +33,7 @@ struct ChecklistCellView: View {
       Text(checklist.name)
         .font(.title2)
         .fontWeight(.bold)
-            
-      HStack {
-        Text("Completions")
-        
-        Text("\(checklist.completionCount)")
-          .highlighted()
-      }
-      
+                  
       ProgressView(value: Double(checklist.completedFeatCountExp), total: Double(max(checklist.featCountExp, 1))) {
         Text("Task Status")
       } currentValueLabel: {

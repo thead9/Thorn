@@ -17,6 +17,9 @@ class Feat: Identifiable, Sortable {
   /// Name of the task
   var name: String = "--"
   
+  /// The date the checklist was created
+  var dateCreated: Date = Date.now
+  
   /// Checklist associated with task
   var checklist: Checklist?
   
@@ -32,6 +35,7 @@ class Feat: Identifiable, Sortable {
   init(named name: String) {
     self.id = UUID()
     self.name = name
+    self.dateCreated = Date.now
   }
   
   @discardableResult
@@ -51,7 +55,7 @@ class Feat: Identifiable, Sortable {
 }
 
 extension ModelContext {
-  /// Deletes a task and all of its cascade relationships
+  /// Deletes a feat and all of its cascade relationships
   /// Ideally, this wouldn't be needed, but having issue with SwiftData automatically deleting
   /// - Parameter feat: Feat to delete
   func delete(feat: Feat) {

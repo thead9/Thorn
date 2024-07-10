@@ -27,7 +27,9 @@ struct ChecklistView: View {
   init(checklist: Checklist) {
     self.checklist = checklist
     
-    _feats = Query(filter: checklist.featsPredicate, sort: [SortDescriptor(\.sortOrder)])
+    _feats = Query(filter: checklist.featsPredicate, sort: [
+      SortDescriptor(\.sortOrder, order: .reverse),
+      SortDescriptor(\.dateCreated)])
   }
   
   var body: some View {
@@ -53,13 +55,6 @@ struct ChecklistView: View {
         } label: {
           Label("Edit List Info", systemImage: "pencil")
         }
-      }
-      
-      HStack {
-        Text("Completions")
-        
-        Text("\(checklist.completionCount)")
-          .highlighted()
       }
     }
     .font(.subheadline)
@@ -143,17 +138,23 @@ fileprivate struct AddNewFeatView: View {
           .submitLabel(.return)
           .focused($isFocused)
           .onSubmit {
-            addNewFeat ()
+            addNewFeat()
           }
           .onAppear{
             isFocused = true
           }
       } header: {
-        HStack {
+        HStack(spacing: 15) {
           Button {
             reset()
           } label: {
             Text("Cancel")
+          }
+          
+          Button {
+            addNewFeat()
+          } label: {
+            Text("Add")
           }
         }
         .textCase(nil)

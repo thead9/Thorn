@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 /// A checklist to track completing certain tasks
-class Checklist: Identifiable {
+class Checklist: Identifiable, Sortable {
   /// Unique Identifier
   let id: UUID = UUID()
   
@@ -20,12 +20,12 @@ class Checklist: Identifiable {
   /// The date the checklist was created
   var dateCreated: Date = Date.now
   
-  /// Number of times this checklist has been completed
-  var completionCount: Int = 0
-
   @Relationship(deleteRule: .cascade, inverse: \Feat.checklist)
   /// Tasks associated with this checklist
   var feats: [Feat]?
+  
+  /// Sort order
+  var sortOrder: Int = 0
   
   var featCountExp: Int {
     do {
@@ -48,14 +48,13 @@ class Checklist: Identifiable {
       return 0
     }
   }
-    
+  
   /// Creates a checklist
   /// - Parameter name: Name of the checklist
   init(named name: String) {
     self.id = UUID()
     self.name = name
     self.dateCreated = Date.now
-    self.completionCount = 0
     self.feats = [Feat]()
   }
   
@@ -75,10 +74,6 @@ class Checklist: Identifiable {
   /// Adds a feat to this checklist
   /// - Parameter task: Task to add
   func add(_ feat: Feat) {
-    let maxSortOrder = feats?.map({ $0.sortOrder }).max()
-    if let maxSortOrder {
-      feat.sortOrder = maxSortOrder + 1
-    }
     feats?.append(feat)
   }
   
@@ -96,17 +91,11 @@ class Checklist: Identifiable {
       feat.isCompleted = false
     }
   }
-  
-  func completionCheck() {
-    if (feats?.count ?? 0) > 0 && (feats?.allSatisfy({ $0.isCompleted }) ?? false) {
-      completionCount += 1
-    }
-  }
 }
 
 // MARK: Predicates
 extension Checklist {
-  /// Prredicate for getting the tasks in the checklist
+  /// Predicate for getting the tasks in the checklist
   var featsPredicate: Predicate<Feat> {
     let id = self.id
     let predicate = #Predicate<Feat> { feat in
